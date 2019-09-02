@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- Payment Form Inherit -->
+    <record id="account_check_printing.view_account_payment_form_inherited" model="ir.ui.view">
+      <field name="name">account.payment.form.inherited</field>
+      <field name="model">account.payment</field>
+      <field name="inherit_id" ref="account.view_account_payment_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//button[@name='post']" position="before">
+          <button name="print_checks" class="oe_highlight" attrs="{'invisible': ['|', ('payment_method_code', 'not in', ['check_printing','pdc']), ('state', '!=', 'posted')]}" string="Print Check" type="object"/>
+          <button name="unmark_sent" attrs="{'invisible': ['|', ('payment_method_code', 'not in', ['check_printing','pdc']), ('state', '!=', 'sent')]}" string="Unmark Sent" type="object"/>
+        </xpath>
+        <xpath expr="//div[@name='amount_div']" position="after">
+          <field name="check_amount_in_words" attrs="{'invisible': [('payment_method_code', 'not in', ['check_printing','pdc'])], 'readonly': [('state', '!=', 'draft')]}" groups="base.group_no_one"/>
+        </xpath>
+        <xpath expr="//field[@name='communication']" position="after">
+          <field name="check_manual_sequencing" invisible="1"/>
+          <field name="check_number" attrs="{'invisible': ['|', ('payment_method_code', 'not in', ['check_printing','pdc']), ('check_number', '=', 0)]}"/>
+        </xpath>
+      </field>
+    </record>
+    <record id="accounting_payment_attribute_account_payment_form_inherit" model="ir.ui.view">
+      <field name="name">pdc.payment.attributes.account.payment.form</field>
+      <field name="model">account.payment</field>
+      <field name="inherit_id" ref="accounting_payment_attributes.payment_attribute_account_payment_form_inherit"/>
+      <field name="arch" type="xml">
+        <field name="cheque_number" position="after">
+          <field name="cheque_reference" attrs="{'required':['|',('payment_journal_type','=','bank'),('payment_method_code', '=', 'pdc')]}"/>
+        </field>
+        <field name="cheque_number" position="attributes">
+          <attribute name="invisible">1</attribute>
+          <attribute name="attrs"></attribute>
+        </field>
+        <field name="cheque_date" position="after">
+          <field name="effective_date" attrs="{'invisible': [('payment_method_code', '!=', 'pdc')],'required': [('payment_method_code', '=', 'pdc')]}"/>
+        </field>
+        <field name="cheque_date" position="attributes">
+          <attribute name="invisible">1</attribute>
+          <attribute name="attrs"></attribute>
+        </field>
+        <field name="bank_name" position="after">
+          <field name="bank_reference" attrs="{'required':['|',('payment_journal_type','=','bank'),('payment_method_code', '=', 'pdc')]}"/>
+        </field>
+        <field name="bank_name" position="attributes">
+          <attribute name="invisible">1</attribute>
+          <attribute name="attrs"></attribute>
+        </field>
+      </field>
+    </record>
+
+    <!-- Payment Invoice Form Inherit -->
+    <record id="account_check_printing.view_account_payment_invoice_form_inherited" model="ir.ui.view">
+      <field name="name">account.payment.invoice.form.inherited</field>
+      <field name="model">account.payment</field>
+      <field name="inherit_id" ref="account.view_account_payment_invoice_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//div[@name='amount_div']" position="after">
+          <field name="check_amount_in_words" attrs="{'invisible': [('payment_method_code', 'not in', ['check_printing','pdc'])]}" groups="base.group_no_one"/>
+        </xpath>
+        <xpath expr="//field[@name='communication']" position="after">
+          <field name="check_manual_sequencing" invisible="1"/>
+          <field name="check_number" attrs="{'invisible': ['|', ('payment_method_code', 'not in', ['check_printing','pdc']), ('check_manual_sequencing', '=', False)]}"/>
+        </xpath>
+      </field>
+    </record>
+    <record id="pdc_payment_attribute_account_payment_invoice_form_inherit" model="ir.ui.view">
+      <field name="name">pdc.payment.attributes.account.payment.invoice.form</field>
+      <field name="model">account.payment</field>
+      <field name="inherit_id" ref="accounting_payment_attributes.payment_attribute_account_payment_invoice_form_inherit"/>
+      <field name="arch" type="xml">
+        <field name="cheque_number" position="after">
+          <field name="cheque_reference" attrs="{'required':['|',('payment_journal_type','=','bank'),('payment_method_code', '=', 'pdc')]}"/>
+        </field>
+        <field name="cheque_number" position="attributes">
+          <attribute name="invisible">1</attribute>
+          <attribute name="attrs"></attribute>
+        </field>
+        <field name="cheque_date" position="after">
+          <field name="effective_date" attrs="{'invisible': [('payment_method_code', '!=', 'pdc')],'required': [('payment_method_code', '=', 'pdc')]}"/>
+        </field>
+        <field name="cheque_date" position="attributes">
+          <attribute name="invisible">1</attribute>
+          <attribute name="attrs"></attribute>
+        </field>
+        <field name="bank_name" position="after">
+          <field name="bank_reference" attrs="{'required':['|',('payment_journal_type','=','bank'),('payment_method_code', '=', 'pdc')]}"/>
+        </field>
+        <field name="bank_name" position="attributes">
+          <attribute name="invisible">1</attribute>
+          <attribute name="attrs"></attribute>
+        </field>
+      </field>
+    </record>
+
+    <!-- Payment Form Search Inherit -->
+    <record id="account_check_printing.view_payment_check_printing_search" model="ir.ui.view">
+      <field name="name">account.payment.check.printing.search</field>
+      <field name="model">account.payment</field>
+      <field name="inherit_id" ref="account.view_account_payment_search"/>
+      <field name="arch" type="xml">
+        <xpath expr="//filter[@name='state_sent']" position="before">
+          <filter string="Checks To Print" domain="[('payment_method_id.code', 'in', ['check_printing','pdc']), ('state','=','posted')]" name="checks_to_send"/>
+        </xpath>
+      </field>
+    </record>
+
+
+    <!-- Journal Entry Form Inherit -->
+    <record id="pdc_payment_attribute_account_move_form_inherit" model="ir.ui.view">
+      <field name="name">pdc.payment.attributes.account.move.form</field>
+      <field name="model">account.move</field>
+      <field name="inherit_id" ref="accounting_payment_attributes.payment_attribute_account_move_form_inherit"/>
+      <field name="arch" type="xml">
+        <field name="cheque_number" position="after">
+          <field name="cheque_reference"/>
+        </field>
+        <field name="cheque_number" position="attributes">
+          <attribute name="invisible">1</attribute>
+          <attribute name="attrs"></attribute>
+        </field>
+        <field name="cheque_date" position="after">
+          <field name="effective_date"/>
+        </field>
+        <field name="cheque_date" position="attributes">
+          <attribute name="invisible">1</attribute>
+          <attribute name="attrs"></attribute>
+        </field>
+        <field name="bank_name" position="after">
+          <field name="bank_reference"/>
+        </field>
+        <field name="bank_name" position="attributes">
+          <attribute name="invisible">1</attribute>
+          <attribute name="attrs"></attribute>
+        </field>
+      </field>
+    </record>
+
+  </data>
+</odoo>

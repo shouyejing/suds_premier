@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form view -->
+        <record id="project_stages_view_form_simplified" model="ir.ui.view">
+            <field name="name">project.stages.form.simplified</field>
+            <field name="model">project.stages</field>
+            <field name="arch" type="xml">
+                <form string="Proejct Stages">
+                    <sheet>
+                        <group>
+                            <field name="stage_name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="project_stages_action_form" model="ir.actions.act_window">
+            <field name="name">Project Stages</field>
+            <field name="res_model">project.stages</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_project_requirements_sale_checklist" name="Checklist" parent="project.menu_project_config"
+            action="project_requirements_sale_checklist_action_form"/>
+
+    </data>
+</odoo>

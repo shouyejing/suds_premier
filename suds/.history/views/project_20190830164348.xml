@@ -1,0 +1,222 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <!-- Inherit Form view -->
+        <record id="application_form_view" model="ir.ui.view">
+            <field name="name">project.project.form</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+
+            <xpath expr="//sheet[@name='Project']" position="before">
+                <header>
+                    <field name="project_stages" widget="statusbar" clickable="True"/>
+                </header>
+            </xpath>
+
+                <field name="label_tasks" position="after">
+                    <div>
+                        <field name="checklist"/>
+                        <label for="checklist" class="oe_inline"/>
+                        
+                    </div>
+                    <field name="checklist_progress" widget="percentpie" attrs="{'invisible':[('checklist','!=',True)]}"/>
+                    <field name="checklist_ids" widget="many2many_checkboxes" attrs="{'invisible':[('checklist','!=',True)]}"/>
+                </field>
+
+                <button name="%(project.act_project_project_2_project_task_all)d" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </button>
+
+                <page name="settings" position="before">
+                    <page name="personal_information" string="Personal Information">
+                        <group>
+                            <group>
+                                <field name="date_of_birth"/>
+                                <field name="age"/>
+                                <field name="gender"/>
+                                <field name="address"/>
+                                <field name="marital_status" widget="selection"/>
+                                <field name="years_living_in_address"/>
+                                <field name="educ_course"/>
+                                <field name="educ_school"/>
+                                <field name="home_phone_number"/>
+                                <field name="mobile_phone_number"/>
+                                <field name="email_address"/>
+                                <field name="feedback"/>
+                            </group>
+
+                            <group>
+                            </group>
+                        </group>
+
+                        <group string="Children" name="children_info">
+                                <field name="children_ids" nolabel="1" colspan="2">
+                                    <tree string="Children Information" editable="bottom">
+                                        <field name="child_name"/>
+                                        <field name="age"/>
+                                    </tree>
+                                </field>
+                            </group>
+
+                        <group string="Employment Information" name="employment_info">
+                            <field name="employment_ids" nolabel="1" colspan="2">
+                                <tree string="Employment Information" editable="bottom">
+                                    <field name="company_name"/>
+                                    <field name="position_held"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+
+                    <page name="questionnaire1" string="Questionnaire 1">
+                        <group colspan="2">
+                            <field name="discussion_of_going_into_business"/>
+                            <field name="complete_agreement"/>
+                            <field name="past_experience_business"/>
+                            <field name="own_current_business"/>
+                            <field name="advantage_of_franchise"/>
+                            <field name="experience_handling_service_related_business"/>
+                            <field name="experience_handling_org"/>
+                        </group>
+                        <group string="Service Related" name="service_related"> 
+                            <field name="service_related_ids" nolabel="1" colspan="2">
+                                <tree string="Service Related" editable="bottom">
+                                    <field name="service_related_work"/>
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Current Business/es" name="current_business">
+                            <field name="current_business_ids" nolabel="1" colspan="2">
+                                <tree string="Current Business" editable="bottom">
+                                    <field name="business_name"/>
+                                    <field name="business_type"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Previous Business/es" name="previous_business">
+                            <field name="previous_business_ids" nolabel="1" colspan="2">
+                                <tree string="Previous Business" editable="bottom">
+                                    <field name="business_name"/>
+                                    <field name="business_type"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Organization/Experience" name="organization">
+                            <field name="organization_ids" nolabel="1" colspan="2">
+                                <tree string="Organizations" editable="bottom">
+                                    <field name="experience"/>
+                                    <field name="number_people_handled"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+
+                    <page name="financial_information" string="Financial Information">
+                        <group>
+                            <field name="current_residence"/>
+                        </group>
+                            <group string="Annual Income" name="annual_income">
+                                <field name="annual_income_ids" nolabel="1" colspan="2">
+                                    <tree string="Annual Income" editable="bottom">
+                                        <field name="income_source"/>
+                                        <field name="income_amount"/>
+                                    </tree>
+                                </field>
+                            </group>
+
+                            <group string="Annual Income of Partner" name="partner_annual_income">
+                                <field name="partner_annual_income_ids" nolabel="1" colspan="2">
+                                    <tree string="Annual Income" editable="bottom">
+                                        <field name="income_source"/>
+                                        <field name="income_amount"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            
+                    </page>
+
+                    <page name="questionnaire_2" string="Questionnaire 2">
+                        <group>
+                            <group>
+                                <field name="savings_to_cushion_franchise"/>
+                                <field name="spouse_employment"/>
+                                <field name="focused_franchise"/>
+                                <field name="reason_for_not_focused" attrs="{'invisible': [('focused_franchise', '!=', True)]}"/>
+                                <field name="sole_source_income"/>
+                            </group>
+
+                            <group>
+                                <field name="partners_for_franchise"/>
+                                <field name="franchise_partner_names" attrs="{'invisible': [('partners_for_franchise', '!=', True)]}"/>
+                                <field name="finance_investment"/>
+                                <field name="investment_amount" attrs="{'invisible': [('finance_investment', '!=', True)]}"/>
+                            </group>
+                        </group>
+                    </page>
+
+                    <page name="franchise_management_information" string="Franchise Management Information">
+                        <group>
+                            <field name="personally_manage_store"/>
+                            <field name="not_manage_relationship" attrs="{'invisible': [('personally_manage_store', '!=', True)]}"/>
+                            <field name="educational_attainment_manager"/>
+                            <field name="spend_six_hours_per_week"/>
+                        </group>
+                    </page>
+
+                    <page name="specific_operations" string="Franchise Specific Questions">
+                        <group>
+                            <group>
+                                <field name="start_franchise_business"/>
+                                <field name="area_location_suds_franchise"/>
+                                <field name="proposed_location"/>
+                                <field name="frontage_dimension_sqm"/>
+                                <field name="length_dimension_sqm"/>
+                                <field name="parking_available"/>
+                                <field name="floor_level"/>
+                                <field name="owner_of_proposed_location"/>
+                            </group>
+
+                            <group>
+                                
+                                <field name="contractual_obligations"/>
+                                <field name="qualities_possesed_to_franchise_suds"/>
+                                <field name="persistence_business"/>
+                                <field name="take_charge_business_problem"/>
+                                <field name="other_details_suds_need_to_know"/>
+                            </group>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+
+        <record id="project_requirements_sale_checklist_view_tree" model="ir.ui.view">
+            <field name="name">project.checklist.items.tree</field>
+            <field name="model">project.checklist.items</field>
+            <field name="arch" type="xml">
+                <tree string="Project Checklist" editable="bottom">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="always_required"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="project_requirements_sale_checklist_action_form" model="ir.actions.act_window">
+            <field name="name">Project Checklist</field>
+            <field name="res_model">project.checklist.items</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+            <menuitem id="menu_project_requirements_sale_checklist" name="Checklist" parent="project.menu_project_config"
+            action="project_requirements_sale_checklist_action_form"/>
+
+
+    </data>
+</odoo>

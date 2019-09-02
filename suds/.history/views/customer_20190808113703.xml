@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form view -->
+        <record id="customer_profile_view_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+            <field name="name" position="after">
+                <field name="business_name"/>
+            </field>
+
+                <field name="parent_id" position="after">
+                    <field name="branch_id" placeholder="Branch"/>
+                    
+                </field>
+                <notebook position="before">
+                    <group>
+                        <group string="For franchisee" name="franchisee_profile" attrs="{'invisible': [('')]}">
+                            <field name="date_opened"/>
+                            <field name="manager_name"/>
+                            <field name="manager_contact_no"/>
+                            <field name="manager_email_address"/>
+                            
+                        </group>
+
+                        <group>
+                            <field name="owner_contact_no"/>
+                            <field name="owner_email_address"/>
+                            <field name="shop_phone"/>
+                            <field name="shop_mobile"/>
+                        </group>
+                    </group>
+
+                    <group string="Social Network Accounts" name="franchisee_social_accounts">
+                        <field name="fb_page"/>
+                        <field name="instagram_account"/>
+                        <field name="twitter_account"/>
+                    </group>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>
