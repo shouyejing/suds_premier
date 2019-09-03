@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 class SaleToProject(models.TransientModel):
     _name='sale.to.project.wizard'
 
-    sale_order_id = fields.Many2one(string="Sale ID")
+    sale_order_id = fields.Many2one('sale.order',string="Sale ID")
     project_name = fields.Char(string="Business Name", required=True)
     partner_id = fields.Many2one('res.partner', string="Customer", required=True)
 

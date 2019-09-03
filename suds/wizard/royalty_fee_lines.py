@@ -10,7 +10,6 @@ class RoyaltyFeetoInvoice(models.TransientModel):
     royalty_fee_to_invoice_ids = fields.One2many('royalty.fee.lines.to.invoice','royalty_fee_lines_id', string="Royalty Fee to Invoice")
     is_royalty_fee = fields.Boolean(default=True)
     analytic_account_id = fields.Many2one('account.analytic.account', string="Analytic Account")
-    segment_id = fields.Many2one('segment.cost.center', string="Segment")
     partner_id = fields.Many2one('res.partner', string="Customer", required=True)
 
     @api.model
