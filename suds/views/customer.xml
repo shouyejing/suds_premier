@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
 
             <field name="name" position="after">
-               <Strong> - </strong> <field name="business_name" placeholder="Business Name"/>
+               <strong> - </strong> <field name="business_name" placeholder="Business Name"/>
             </field>
 
                 <div class="oe_title" position="inside">
