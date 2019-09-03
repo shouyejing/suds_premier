@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <report 
+        string="Canvass Sheet" 
+        id="purchase_requisition.action_report_purchase_requisitions" 
+        model="purchase.requisition" 
+        report_type="qweb-pdf"
+        name="purchase_requisition.report_purchaserequisitions" 
+        file="purchase_requisition.report.report_purchaserequisitions"
+        print_report_name="'Canvass Sheet - %s' % (object.name)"
+    />
+
+    
+
+    </data>
+</odoo>
