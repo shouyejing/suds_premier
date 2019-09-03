@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <template id="sales_invoice_inherit_view" inherit_id="account.report_invoice_with_payments">
+        <div name="invoice_address" position="replace"/>
+
+        <div class="row" position="after">
+            <div name="invoice_address" style="text-align: left;">
+                <address t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="o.partner_id.vat"/></div>
+            </div>
+        </div>
+
+        </template>
+    </data>
+</odoo>

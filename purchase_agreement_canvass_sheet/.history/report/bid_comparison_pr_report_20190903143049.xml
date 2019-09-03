@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <report 
+        string="Canvass Sheet" 
+        id="purchase_requisition.action_report_purchase_requisitions" 
+        model="purchase.requisition" 
+        report_type="qweb-pdf"
+        name="purchase_requisition.report_purchaserequisitions" 
+        file="purchase_requisition.report.report_purchaserequisitions"
+        print_report_name="'Canvass Sheet - %s' % (object.name)"
+    />
+
+    <template id="sales_invoice_inherit_view" inherit_id="purchase_requisition.report_purchaserequisitions">
+        <t t-if="o.purchase_ids" position="replace"/>
+
+        <t t-if="o.line_ids" position="after">
+            <t t-if="o.purchase_ids">
+                <h3>Requests for Quotation Details</h3>
+                <table class="table table-condensed">
+                    <tr t-foreach="o.purchase_ids" t-as="purchase_ids">
+                        <tbody>
+                            <tr style="border: 1px; border-color: black;"> 
+                                <th><strong> Vendor </strong></th>
+                                <td> <span t-field="purchase_ids.partner_id.name"/> </td> 
+
+                                <th><strong> Date </strong></th>
+                                <td> <span t-field="purchase_ids.date_order"/> </td> 
+
+                                <th><strong> Reference </strong></th>
+                                <td> <span t-field="purchase_ids.name"/> </td> 
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                    <strong> Product </strong>
+                                </td>
+
+                                <td style="text-align: right;">
+                                    <strong> Qty </strong> 
+                                </td>
+
+                                <td style="text-align: left;">
+                                    <strong> UoM </strong>
+                                </td>
+
+                                <td>
+                                    <strong> Scheduled Date </strong>
+                                </td>
+
+                                <td>
+                                    <strong> Unit Price </strong>
+                                </td>
+
+                                
+                            </tr>
+
+                            
+
+                            <tr t-foreach="purchase_ids.order_line" t-as="purchase_order_line_ids">
+                                <td colspan="2">
+                                    <span t-field="purchase_order_line_ids.product_id.name"/>
+                                </td>
+
+                                <td style="text-align: right;">
+                                    <span t-field="purchase_order_line_ids.product_qty"/>
+                                </td>
+
+                                <td>
+                                    <span t-field="purchase_order_line_ids.product_uom"/>
+                                </td>
+
+                                <td>
+                                    <span t-field="purchase_order_line_ids.date_planned"/>
+                                </td>
+
+                                <td>
+                                    <span t-field="purchase_order_line_ids.price_unit"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5">
+                                    Untaxed Amount
+                                </td>
+                                <td> 
+                                    <span t-field="purchase_ids.amount_untaxed"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5">
+                                    Taxes
+                                </td>
+                                <td> 
+                                    <span t-field="purchase_ids.amount_tax"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5">
+                                    Total
+                                </td>
+                                <td> 
+                                    <span t-field="purchase_ids.amount_total"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </tbody>
+                    </tr>
+                </table>
+            </t>
+
+        </t>
+
+        <t t-if="o.line_ids" position="replace"/>
+
+    
+    </template>
+
+    </data>
+</odoo>

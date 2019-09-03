@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+
+    <!-- Type of System Test Defaults -->
+  	<record id="month_jan" model="royalty.fee.month">
+		<field name="name">January</field>
+	</record>
+	<record id="month_feb" model="royalty.fee.month">
+		<field name="name">February</field>
+	</record>
+    <record id="month_mar" model="royalty.fee.month">
+		<field name="name">March</field>
+	</record>
+    <record id="month_apr" model="royalty.fee.month">
+		<field name="name">April</field>
+	</record>
+    <record id="month_may" model="royalty.fee.month">
+		<field name="name">May</field>
+	</record>
+    <record id="month_june" model="royalty.fee.month">
+		<field name="name">June</field>
+	</record>
+    <record id="month_july" model="royalty.fee.month">
+		<field name="name">July</field>
+	</record>
+    <record id="month_aug" model="royalty.fee.month">
+		<field name="name">August</field>
+	</record>
+    <record id="month_sept" model="royalty.fee.month">
+		<field name="name">September</field>
+	</record>
+    <record id="month_oct" model="royalty.fee.month">
+		<field name="name">October</field>
+	</record>
+    <record id="month_nov" model="royalty.fee.month">
+		<field name="name">November</field>
+	</record>
+    <record id="month_dec" model="royalty.fee.month">
+		<field name="name">December</field>
+	</record>
+
+</data>
+</odoo>

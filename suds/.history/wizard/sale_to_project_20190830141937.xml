@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+    <record id="sale_to_project_view_form_simplified" model="ir.ui.view">
+        <field name="name">sale.to.project.wizard.form.simplified</field>
+        <field name="model">sale.to.project.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Project from Sales">
+                <sheet>
+                    <group>
+                        <field name="project_name"/>
+                        <field name="partner_id"/>
+                        <field name="sale_order_id"/>
+                    </group>
+
+                    <footer>
+                        <group colspan="2">
+                            <button string="Create Project" name="create_project" type="object" class="btn-primary"/>
+                            <button string="Discard" class="btn-default" special="cancel"/>
+                        </group>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    
+
+
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+        <!-- Rename Picking Operation to Receiving Report -->
+        <report
+            string="Receiving Report"
+            id="stock.action_report_picking"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="stock.report_picking"
+            file="stock.report_picking_operations"
+            print_report_name="'Receiving Report - %s - %s' % (object.partner_id.name or '', object.name)"
+        />
+
+    </data>
+</odoo>

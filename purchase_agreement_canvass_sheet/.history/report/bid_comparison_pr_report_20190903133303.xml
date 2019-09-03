@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <report 
+        string="Canvass Sheet" 
+        id="purchase_requisition.action_report_purchase_requisitions" 
+        model="purchase.requisition" 
+        report_type="qweb-pdf"
+        name="purchase_requisition.report_purchaserequisitions" 
+        file="purchase_requisition.report.report_purchaserequisitions"
+        print_report_name="'Canvass Sheet - %s' % (object.name)"
+    />
+
+    <template id="sales_invoice_inherit_view" inherit_id="purchase_requisition.report_purchaserequisitions">
+        <t t-if="o.purchase_ids" position="replace"/>
+
+        <t t-if="o.line_ids" position="after">
+            <t t-if="o.purchase_ids">
+                <h3>Requests for Quotation Details</h3>
+                <table class="table table-bordered">
+                    <tr t-foreach="o.purchase_ids" t-as="purchase_ids">
+                        <tbody>
+                            <tr> 
+                                <th><strong> Vendor </strong></th>
+                                <td> <span t-field="purchase_ids.partner_id.name"/> </td> 
+
+                                <th><strong> Date </strong></th>
+                                <td> <span t-field="purchase_ids.date_order"/> </td> 
+
+                                <th><strong> Reference </strong></th>
+                                <td> <span t-field="purchase_ids.name"/> </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <th> <strong> Product </strong> </th>
+                                </td>
+
+                                <td>
+                                    <th> <strong> Qty </strong> <strong> UoM </strong> </th>
+                                </td>
+
+                                <td>
+                                    <th>  </th>
+                                </td>
+
+                                <td>
+                                    <th> <strong> Scheduled Date </strong> </th>
+                                </td>
+                            </tr>
+
+                            
+
+                            <tr t-foreach="o.purchase_ids." t-as="purchase_ids">
+                                <td>
+                                    Sample Product
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </tr>
+
+
+                </table>
+            </t>
+
+        </t>
+
+
+    
+    </template>
+
+    </data>
+</odoo>
