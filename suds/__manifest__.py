@@ -12,7 +12,7 @@
         'base', 'project', 'analytic', 'purchase', 'sale'
         ],
     'data': [
-        
+        'security/ir.model.access.csv',
         'wizard/royalty_fee_lines.xml',
         'wizard/sale_to_project.xml',
         'views/analytic_account.xml',
