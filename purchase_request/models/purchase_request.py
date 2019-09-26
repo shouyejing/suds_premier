@@ -21,7 +21,7 @@ class SprogroupPurchaseRequest(models.Model):
 
     _name = 'sprogroup.purchase.request'
     _description = 'Sprogroup Purchase Request'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
 
     @api.model
@@ -53,7 +53,6 @@ class SprogroupPurchaseRequest(models.Model):
     assigned_to = fields.Many2one('res.users', 'Approver',
                                   track_visibility='onchange')
     description = fields.Text('Description')
-
     line_ids = fields.One2many('sprogroup.purchase.request.line', 'request_id',
                                'Products to Purchase',
                                readonly=False,
@@ -66,18 +65,22 @@ class SprogroupPurchaseRequest(models.Model):
                              required=True,
                              copy=False,
                              default='draft')
-    purchase_order_ids = fields.One2many('purchase.order', 'purchase_request_id', string="Purchase Orders")
-    purchase_requisition_ids = fields.Many2many('purchase.requisition', string="Purchase Requitions", compute="get_purchase_requisitions")
+    purchase_order_id = fields.Many2one('purchase.order', string="Purchase Orders", copy=False)
+    purchase_requisition_id = fields.Many2one('purchase.requisition', string="Purchase Requition", copy=False)
+    # purchase_requisition_id = fields.Many2one('purchase.requisition',
+    #                                           string="Purchase Requition",
+    #                                           readonly=True, compute="get_purchase_requisitions")
+    # purchase_requisition_ids = fields.Many2many('purchase.requisition', string="Purchase Requitions", compute="get_purchase_requisitions")
 
-    @api.multi
-    def get_purchase_requisitions(self):
-        for data in self:
-            requisition_data = data.env['purchase.requisition'].search([])
-            ids = []
-            for i in requisition_data:
-                if i.purchase_request_id and i.purchase_request_id.id == data.id: ids.append(i.id)
-                elif data.id in [line.id for line in i.purchase_request_merge_ids]: ids.append(i.id)
-            data.purchase_requisition_ids = [(6, 0, ids)]
+    # @api.multi
+    # def get_purchase_requisitions(self):
+    #     for data in self:
+    #         requisition_data = data.env['purchase.requisition'].search([])
+    #         ids = []
+    #         for i in requisition_data:
+    #             if i.purchase_request_id and i.purchase_request_id.id == data.id: ids.append(i.id)
+    #             elif data.id in [line.id for line in i.purchase_request_merge_ids]: ids.append(i.id)
+    #         data.purchase_requisition_ids = [(6, 0, ids)]
 
 
     @api.onchange('state')
@@ -92,7 +95,6 @@ class SprogroupPurchaseRequest(models.Model):
             if(len(employee) > 0):
                 if(employee[0].department_id and employee[0].department_id.manager_id):
                     assigned_to = employee[0].department_id.manager_id.user_id
-
         self.assigned_to =  assigned_to
 
     @api.one
@@ -157,20 +159,20 @@ class SprogroupPurchaseRequest(models.Model):
                                  compute="_compute_is_editable",
                                  readonly=True)
 
-    @api.model
-    def create(self, vals):
-        request = super(SprogroupPurchaseRequest, self).create(vals)
-        if vals.get('assigned_to'):
-            request.message_subscribe_users(user_ids=[request.assigned_to.id])
-        return request
-
-    @api.multi
-    def write(self, vals):
-        res = super(SprogroupPurchaseRequest, self).write(vals)
-        for request in self:
-            if vals.get('assigned_to'):
-                self.message_subscribe_users(user_ids=[request.assigned_to.id])
-        return res
+    # @api.model
+    # def create(self, vals):
+    #     request = super(SprogroupPurchaseRequest, self).create(vals)
+    #     if vals.get('assigned_to'):
+    #         request.message_subscribe_users(user_ids=[request.assigned_to.parent_id.id])
+    #     return request
+    #
+    # @api.multi
+    # def write(self, vals):
+    #     res = super(SprogroupPurchaseRequest, self).write(vals)
+    #     for request in self:
+    #         if vals.get('assigned_to'):
+    #             self.message_partner_ids(user_ids=[request.assigned_to.parent_id.id])
+    #     return res
 
     @api.multi
     def button_draft(self):

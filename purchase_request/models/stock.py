@@ -7,10 +7,17 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     purchase_request_id = fields.Many2one('sprogroup.purchase.request', string="Purchase Request Origin")
+    picking_type = fields.Char(store=True, compute='_get_picking_code')
+
+    @api.depends('picking_type_id')
+    def _get_picking_code(self):
+        for i in self:
+            i.picking_type = i.picking_type_id and i.picking_type_id.code or ''
 
     @api.multi
     def create_purchase_request(self):
-        if self.state in ['waiting', 'confirmed'] and not self.purchase_request_id:
+        self.action_assign()
+        if self.state in ['waiting', 'confirmed', 'assigned'] and not self.purchase_request_id:
             product_data = []
             for i in self.move_lines:
                 if i.product_uom_qty > i.reserved_availability:

@@ -3,7 +3,7 @@
 
 {
     'name': 'Request Purchase Product',
-    'version': '1.0',
+    'version': '12.0',
     'category': 'Purchases',
     'author':'Dennis Boy Silva and tung.tung11191@gmail.com',
     'description': """
@@ -11,7 +11,13 @@ Use Purchase Request module for requesting product.
     """,
     'summary': 'Create purchase request',
     'website': 'https://www.odoo.com/page/survey',
-    'depends': ['mail', 'website'],
+    'depends': ['mail',
+                 'website',
+                 'account',
+                 'purchase',
+                 'purchase_requisition',
+                 'stock',
+                 'hr'],
 	'images': ['static/description/icon.jpg'],
     'data': [
         'data/purchase_request_data.xml',
@@ -23,7 +29,7 @@ Use Purchase Request module for requesting product.
         'views/stock.xml',
 
     ],
-    'depends': ['hr', 'purchase', 'purchase_requisition'],
+    'depends': ['hr', 'stock','purchase', 'purchase_requisition'],
     'installable': True,
     'auto_install': False,
     'application': True,

@@ -10,9 +10,11 @@
           <group>
             <group>
               <field name="action"/>
+              <field name="purchase_request_id" invisible="1"/>
             </group>
             <group>
-              <field name="purchase_requisition_ids" attrs="{'invisible': [('action', 'in', [False, 'New'])], 'required': [('action', 'not in', [False, 'New'])]}"/>
+              <field name="purchase_requisition_ids" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                attrs="{'invisible': [('action', 'in', [False, 'New'])], 'required': [('action', 'not in', [False, 'New'])]}"/>
               <field name="purchase_requisition_type_id" attrs="{'invisible': [('action', 'not in', [False, 'New'])], 'required': [('action', 'in', [False, 'New'])]}"/>
             </group>
           </group>
