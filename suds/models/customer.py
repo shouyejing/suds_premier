@@ -20,4 +20,4 @@ class FranchiseeProfile(models.Model):
     branch_id = fields.Many2one('branches.cost.center', string="Branch")
     business_name = fields.Char(string="Business Name")
     company_name = fields.Char(related="parent_id.name")
-    country_id = fields.Many2one(related="state_id.country_id", string="Country")
+    country_id = fields.Many2one(related="state_id.country_id", string="Country", store=True)
