@@ -68,6 +68,7 @@
                     <table class="table table-condensed" name="invoice_line_table">
                         <thead>
                             <tr>
+                                <th>Product</th>
                                 <th>Description</th>
                                 <th class="text-right">Quantity</th>
                                 <th class="text-right">Unit Price</th>
@@ -78,6 +79,7 @@
                         </thead>
                         <tbody class="invoice_tbody">
                             <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                <td><span t-field="l.product_id"/></td>
                                 <td><span t-field="l.name"/></td>
                                 <td class="text-right">
                                     <span t-field="l.quantity"/>
