@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+    <template id="sales_qoute_inherit_view" inherit_id="sale.report_saleorder_document">
+        <div class="col-xs-6" position="inside">
+            <div>
+                <p>BILL TO <br/>
+                <span t-field='doc.analytic_account_id'/> <br/>
+                <span t-field='doc.branch_id'/> <br/> </p>
+            </div>
+        </div>
+    </template>
+
+    
+    
+
+
+    </data>
+</odoo>

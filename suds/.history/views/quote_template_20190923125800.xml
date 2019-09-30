@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <!-- Inherit Form view -->
+    <record id="aquion_template_view_form" model="ir.ui.view">
+        <field name="name">sale.quote.template.form</field>
+        <field name="model">sale.quote.template</field>
+        <field name="inherit_id" ref="website_quote.view_sale_quote_template_form"/>
+        <field name="arch" type="xml">
+            <notebook position="before">
+                <group>
+                    <group>
+                        <field name="shift" />
+                        <field name="date_of_pickup"/>
+                        <field name="delivery_date"/>
+                        <field name="department_id"/>
+                    </group>
+                    <group>
+                    </group>
+                </group>
+            </notebook>
+
+            <field name="quote_line" position="attributes">
+                <attribute name="context">{'default_delivery_date':delivery_date,
+                                            'default_date_of_pickup': date_of_pickup,
+                                            'default_shift': shift,
+                                            'default_department_id': department_id}</attribute>
+            </field>
+
+            <xpath expr="//notebook/page/field[@name='quote_line']/tree/field[@name='product_id']" position="after">
+                <field name="date_of_pickup"/>
+                <field name="shift"/>
+                <field name="delivery_date"/>
+                <field name="department_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    </data>
+</odoo>

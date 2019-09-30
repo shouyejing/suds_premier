@@ -9,7 +9,7 @@
     'sequence': 1,
     'version': '1.0',
     'depends': [
-        'base', 'project', 'analytic', 'purchase', 'sale', 'purchase_requisition', 'website_quote'
+        'base', 'project', 'analytic', 'purchase', 'sale', 'purchase_requisition'
         ],
     'data': [
         'security/ir.model.access.csv',
@@ -30,10 +30,9 @@
         'report/picking_operations.xml',
         'report/delivery_receipt.xml',
         'report/service_invoice.xml',
-        'report/invoice_multiple_so.xml',
         'data/months.xml',
         'data/royalty_fee_reference.xml',
-        'data/res_company.xml',
+        'data/res.company.csv',
         'data/project_stages.xml'
         
     ],

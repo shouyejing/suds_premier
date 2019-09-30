@@ -33,7 +33,7 @@
         'report/invoice_multiple_so.xml',
         'data/months.xml',
         'data/royalty_fee_reference.xml',
-        'data/res_company.xml',
+        'data/res.company.csv',
         'data/project_stages.xml'
         
     ],

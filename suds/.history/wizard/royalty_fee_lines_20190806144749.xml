@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+        <record id="model_name_view_form" model="ir.ui.view">
+            <field name="name">royalty.fee.to.invoice.form</field>
+            <field name="model">royalty.fee.to.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Royalty Fee Lines to Invoice">
+                    <sheet>
+                        <group>
+                            <field name="branch_id"/>
+                            <field name="is_royalty_fee"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        
+
+    </data>
+</odoo>
