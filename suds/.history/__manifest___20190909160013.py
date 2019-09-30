@@ -9,7 +9,7 @@
     'sequence': 1,
     'version': '1.0',
     'depends': [
-        'base', 'project', 'analytic', 'purchase', 'sale', 'purchase_requisition', 'website_quote'
+        'base', 'project', 'analytic', 'purchase', 'sale'
         ],
     'data': [
         'security/ir.model.access.csv',
@@ -23,17 +23,12 @@
         'views/project.xml',
         'views/royalty_fee.xml',
         'views/customer.xml',
-        'views/res_user.xml',
-        'views/quote_template.xml',
         'report/sales_qoutation.xml',
         'report/sales_invoice_without_payment.xml',
         'report/picking_operations.xml',
-        'report/delivery_receipt.xml',
-        'report/service_invoice.xml',
-        'report/invoice_multiple_so.xml',
         'data/months.xml',
         'data/royalty_fee_reference.xml',
-        'data/res_company.xml',
+        #'data/res.company.csv',
         'data/project_stages.xml'
         
     ],

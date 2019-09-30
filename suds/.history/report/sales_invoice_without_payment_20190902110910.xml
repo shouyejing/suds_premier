@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+     <template id="sales_invoice_inherit_view" inherit_id="account.report_invoice_document">
+        <!-- <div class="row" position="replace"/>
+
+        <div class="page" position="inside">
+            <div class="row" style="text-align: left;">
+                <p> BILL TO </p>
+                <div name="invoice_address" class="col-xs-5 col-xs-offset-7">
+                    <address t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                    <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="o.partner_id.vat"/></div>
+                </div>
+            </div>
+        </div> -->
+        
+        <table name="invoice_line_table" position="replace"/>
+        <t t-set="display_discount" position="after">
+            <table class="table table-condensed" name="invoice_line_table">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th class="hidden">Source Document</th>
+                        <th class="text-right">Quantity</th>
+                        <th class="text-right">UoM</th>
+                        <th class="text-right">Unit Price</th>
+                        <th t-if="display_discount" class="text-right">Disc.(%)</th>
+                        <th class="text-right">Taxes</th>
+                        <th class="text-right">Amount</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr t-foreach="o.invoice_line_ids" t-as="l">
+                        <td><span t-field="l.name"/></td>
+                        <td class="hidden"><span t-field="l.origin"/></td>
+                        <td class="text-right">
+                            <span t-field="l.quantity"/>
+                        </td>
+                        <td class="text-right"> <span t-field="l.uom_id" groups="product.group_uom"/> </td>
+                        <td class="text-right">
+                            <span t-field="l.price_unit"/>
+                        </td>
+                        <td t-if="display_discount" class="text-right">
+                            <span t-field="l.discount"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.invoice_line_tax_ids))"/>
+                        </td>
+                        <td class="text-right" id="subtotal">
+                            <span t-field="l.price_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                        </td>
+                    </tr>
+                    <tr t-foreach="range(max(5-len(o.invoice_line_ids),0))" t-as="l">
+                        <td t-translation="off">&amp;nbsp;</td>
+                        <td class="hidden"/>
+                        <td/>
+                        <td/>
+                        <td t-if="display_discount"/>
+                        <td/>
+                        <td/>
+                    </tr>
+                </tbody>
+            </table>
+        </t>
+
+     </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form view -->
+        <record id="customer_profile_view_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+            <field name="name" position="after">
+                <field name="business_name" placeholder="Business Name"/>
+            </field>
+
+                <field name="parent_id" position="after">
+                    <field name="branch_id" placeholder="Branch"/>
+                    <field name="company_name"/>
+                </field>
+                <notebook position="before">
+                    <group >
+                        <group name="franchisee_profile" >
+                            <field name="date_opened"/>
+                            <field name="manager_name"/>
+                            <field name="manager_contact_no"/>
+                            <field name="manager_email_address"/>
+                            
+                        </group>
+
+                        <group>
+                            <field name="owner_contact_no"/>
+                            <field name="owner_email_address"/>
+                            <field name="shop_phone"/>
+                            <field name="shop_mobile"/>
+                        </group>
+                    </group>
+<!-- attrs="{'invisible': [('company_name', 'not ilike', 'SUDS Premiere')]}"-->
+                    <group>
+                    <group string="Social Network Accounts" name="franchisee_social_accounts">
+                        <field name="fb_page"/>
+                        <field name="instagram_account"/>
+                        <field name="twitter_account"/>
+                    </group>
+
+                    <group></group>
+                    </group>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>
