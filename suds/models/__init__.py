@@ -5,3 +5,4 @@ from . import stock_picking
 from . import project
 from . import royalty_fee
 from . import customer
+from . import res_user

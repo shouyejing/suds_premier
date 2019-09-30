@@ -4,22 +4,14 @@ from odoo.exceptions import UserError
 import logging
 _logger = logging.getLogger(__name__)
 
-class RoyaltyFee(models.Model):
-    _name='royalty.fee'
-
-    start_date = fields.Date(string="Duration")
-    end_date = fields.Date(string="End")
-
-    royalty_fees_line_ids = fields.One2many('royalty.fees.line', 'royalty_fee_id', string="Royalty Fees")
-    total_amount = fields.Float(string="Total Amount")
-
 class MonthlyRoyaltyFeeLines(models.Model):
     _name='monthly.royalty.fees.line'
 
     month = fields.Many2one('royalty.fee.month', string="Month")
     year = fields.Char(string="Year")
     branch_id = fields.Many2one('branches.cost.center', string="Branch")
-    gross_amount = fields.Float(string="Gross Sales", compute="compute_gross_sales")
+    account_id = fields.Many2one('account.account', string="Account")
+    gross_amount = fields.Float(string="Gross Sales", compute="compute_gross_sales", store=True)
     total_revenue = fields.Float(string="Total Revenue")
     other_additions = fields.Float(string="Other Additions")
     other_deductions = fields.Float(string="Other Deductions")
@@ -63,18 +55,6 @@ class MonthlyRoyaltyFeeLines(models.Model):
     """ =ROUND(-IF($B$2=$Z$1,(((B7+D7+C7)/1.12)*0.12),IF($B$2=$Z$2,((B7+D7+C7)*0.03),0)),2) """
 
 
-class RoyaltyFeeLine(models.Model):
-    _name='royalty.fees.line'
-
-    royalty_fee_id = fields.Many2one('royalty.fee')
-    month = fields.Many2one('royalty.fee.month', string="Month")
-    gross_amount = fields.Float(string="Gross")
-    total_revenue = fields.Float(string="Total Revenue")
-    royalty_rate = fields.Float(string="Royalty Fee %")
-    tax = fields.Many2one('account.tax', string="Tax")
-    swp = fields.Float(string="SWP")
-    subtotal = fields.Float(string="Subtotal")
-
 class RoyaltyMonths(models.Model):
     _name='royalty.fee.month'
 
@@ -84,6 +64,7 @@ class RoyaltyMonths(models.Model):
 class RoyaltyFeeReference(models.Model):
     _name='royalty.fee.reference'
 
+    name = fields.Char(string="Rate", default="Rate")
     min_monthly_gross_sales = fields.Float(string="Minimum Monthly Gross Sales")
     max_monthly_gross_sales = fields.Float(string="Maximum Monthly Gross Sales")
     royalty_fee = fields.Float(string="Corresponding Continuing Services and Royalty Fee")

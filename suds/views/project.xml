@@ -14,19 +14,9 @@
                 </header>
             </xpath>
 
-                <field name="label_tasks" position="after">
-                    <div>
-                        <field name="checklist"/>
-                        <label for="checklist" class="oe_inline"/>
-                        
-                    </div>
-                    <field name="checklist_progress" widget="percentpie" attrs="{'invisible':[('checklist','!=',True)]}"/>
-                    <field name="checklist_ids" widget="many2many_checkboxes" attrs="{'invisible':[('checklist','!=',True)]}"/>
-                </field>
+                
 
-                <button name="%(project.act_project_project_2_project_task_all)d" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </button>
+               
 
                 <page name="settings" position="before">
                     <page name="personal_information" string="Personal Information">
@@ -196,26 +186,6 @@
         </record>
 
 
-        <record id="project_requirements_sale_checklist_view_tree" model="ir.ui.view">
-            <field name="name">project.checklist.items.tree</field>
-            <field name="model">project.checklist.items</field>
-            <field name="arch" type="xml">
-                <tree string="Project Checklist" editable="bottom">
-                    <field name="name"/>
-                    <field name="description"/>
-                    <field name="always_required"/>
-                </tree>
-            </field>
-        </record>
-
-        <record id="project_requirements_sale_checklist_action_form" model="ir.actions.act_window">
-            <field name="name">Project Checklist</field>
-            <field name="res_model">project.checklist.items</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-            <menuitem id="menu_project_requirements_sale_checklist" name="Checklist" parent="project.menu_project_config"
-            action="project_requirements_sale_checklist_action_form"/>
 
 
     </data>

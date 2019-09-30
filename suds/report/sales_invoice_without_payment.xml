@@ -3,21 +3,25 @@
     <data>
 
      <template id="sales_invoice_inherit_view" inherit_id="account.report_invoice_document">
-        <div name="invoice_address" position="replace"/>
+        
+        <div class="row" position="replace"/>
 
-        <div class="row" position="after">
-            <p> BILL TO </p>
-            <div name="invoice_address" style="text-align: left;">
-                <address t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
-                <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="o.partner_id.vat"/></div>
+        <h2 position="before">
+            <div class="row">
+                <div name="invoice_address" class="col-xs-6" style="text-align: left;">
+                    <p> BILL TO </p>
+                    <address t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                    <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="o.partner_id.vat"/></div>
+                </div>
             </div>
-        </div>
+        </h2>
         
         <table name="invoice_line_table" position="replace"/>
         <t t-set="display_discount" position="after">
             <table class="table table-condensed" name="invoice_line_table">
                 <thead>
                     <tr>
+                        <th>Product</th>
                         <th>Description</th>
                         <th class="hidden">Source Document</th>
                         <th class="text-right">Quantity</th>
@@ -30,6 +34,7 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr t-foreach="o.invoice_line_ids" t-as="l">
+                        <td><span t-field="l.product_id"/></td>
                         <td><span t-field="l.name"/></td>
                         <td class="hidden"><span t-field="l.origin"/></td>
                         <td class="text-right">
@@ -63,6 +68,8 @@
         </t>
 
      </template>
+
+     
 
     </data>
 </odoo>

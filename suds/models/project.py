@@ -90,30 +90,11 @@ class FranchiseeProfile(models.Model):
 
     #### End if franchisee profle ###
 
-    ### checkilist requirements ###
-
-    checklist = fields.Boolean(string="Enable Checklist")
-    checklist_progress = fields.Float(string="Supplemented", compute="compute_checklist_progress")
-    checklist_ids = fields.Many2many(string="Requirements", comodel_name="project.checklist.items")
-
+    
     ###for stages###
     project_stages = fields.Many2one('project.task.type')
 
 
-    @api.depends('checklist_ids')
-    def compute_checklist_progress(self):
-        for record in self:
-            total_len = self.env['project.checklist.items'].search_count([])
-            cl_len = len(record.checklist_ids)
-            if total_len != 0:
-                record.checklist_progress = (cl_len * 100) / total_len
-
-class ProjectRequirements(models.Model):
-    _name='project.checklist.items'
-
-    name = fields.Char(string="Item", required=True)
-    description = fields.Text(string="Description")
-    always_required = fields.Boolean(string="Always Required", default=True)
 
 class AnnualIncome(models.Model):
     _name='annual.income'

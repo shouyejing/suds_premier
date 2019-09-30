@@ -4,6 +4,8 @@ from odoo.exceptions import UserError
 import logging
 _logger = logging.getLogger(__name__)
 
+
+
 class RoyaltyFeetoInvoice(models.TransientModel):
     _name='royalty.fee.to.invoice'
 
@@ -11,14 +13,18 @@ class RoyaltyFeetoInvoice(models.TransientModel):
     is_royalty_fee = fields.Boolean(default=True)
     analytic_account_id = fields.Many2one('account.analytic.account', string="Analytic Account")
     partner_id = fields.Many2one('res.partner', string="Customer", required=True)
+    
 
     @api.model
     def _prepare_item(self, line):
         return {
             'royalty_fee_lines_id': line.id,
             'month': line.month.id,
-            'royalty_fee': line.subtotal,
+            'account_id': line.account_id.id,
+            'royalty_fee': line.total_royalty_fee,
+            'swp': line.swp
         }
+
 
     @api.model
     def default_get(self, fields):
@@ -38,33 +44,41 @@ class RoyaltyFeetoInvoice(models.TransientModel):
         res['royalty_fee_to_invoice_ids'] = items
         return res
 
-    @api.model
-    def _prepare_customer_invoice(self, picking_type_id,
-                                      company_id):
-        data = {
-            'origin': '',
-            'picking_type_id': picking_type_id,
-            'company_id': company_id,
-            }
-        return data
+
 
     @api.multi
-    def _prepare_royalty_invoice_line(self, line):
+    def _prepare_royalty_invoice_line_royalty_fee(self, line):
         return {
                 'product_id.name': 'Royalty Fee',
                 'month': line.month.id,
                 'quantity': 1,
-                'name': 'Royalty Fee',
+                'name': line.month.name + ' Royalty Fee',
                 'price_unit':line.royalty_fee,
                 'price_subtotal': line.royalty_fee,
+                'account_id': line.account_id.id
                 }
+
+    @api.multi
+    def _prepare_royalty_invoice_line_swp(self, line):
+        return {
+                'product_id.name': 'SWP',
+                'month': line.month.id,
+                'quantity': 1,
+                'name': line.month.name + ' System Wide Payment Fee',
+                'price_unit':line.swp,
+                'price_subtotal': line.swp,
+                'account_id': line.account_id.id
+                }
+
+
 
     @api.multi
     def make_royalty_line_invoice(self):
         view_id = self.env.ref('account.invoice_form')
         invoice_fees=[]
         for line in self.royalty_fee_to_invoice_ids:
-            invoice_fees.append([0, 0, self._prepare_royalty_invoice_line(line)])
+            invoice_fees.append([0, 0, self._prepare_royalty_invoice_line_royalty_fee(line)])
+            invoice_fees.append([0, 0, self._prepare_royalty_invoice_line_swp(line)])
 
         
         return {
@@ -85,25 +99,7 @@ class RoyaltyFeetoInvoice(models.TransientModel):
                     'default_name': '',
                     }
             }
-        # create_invoice = self.env['account.invoice'].create({
-        #     'partner_id': self.partner_id.id,
-        #     'is_royalty_fee': True,
-        #     'segment_id': self.segment_id.id,
-        #     'date_invoice': datetime.now(),
-        # })
-
-        # created_invoice = self.env['account.invoice'].browse(create_invoice.id)
-        # for line in self.royalty_fee_to_invoice_ids:
-        #     for invoice_lines in created_invoice.invoice_line_ids:
-        #         created_invoice.write({'invoice_line_ids': [(6,0,{
-        #             'product_id.name': 'Royalty Fee',
-        #             'month': line.month,
-        #             'price_unit':line.royalty_fee,
-        #             'invoice_id': create_invoice.id
-        #         })]
-        # })
-        
-        
+     
         
         
 
@@ -113,6 +109,7 @@ class RoyaltyFeeLinestoInvoice(models.TransientModel):
     royalty_fee_lines_id = fields.Many2one('royalty.fee.to.invoice')
     month = fields.Many2one('royalty.fee.month', string="Month")
     royalty_fee = fields.Float(string="Royalty Fee")
-
+    swp = fields.Float(string="SWP")
+    account_id = fields.Many2one('account.account', string="Account")
 
 

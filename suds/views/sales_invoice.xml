@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
                     <field name="analytic_account_id" domain="[('company_id', '=', company_id)]"/>
-                    <field name='branch_id' attrs="{'invisible': [('company_name', 'in', ['SUDS Premiere','Aquion'])]}"/>
+                    <field name='branch_id' attrs="{'invisible': [('company_name', 'in', ['Suds Premier Franchising Corp','Aquion Industrial Laundries'])]}"/>
                     <field name='company_name' invisible="1"/>
                 </field>
             </field>

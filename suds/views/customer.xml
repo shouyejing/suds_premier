@@ -17,7 +17,7 @@
                     <field name="company_name" invisible="1"/>
                 </div>
                 <notebook position="before">
-                    <group attrs="{'invisible': [('company_name', 'in', ['SUDS Premiere','Aquion'])]}">
+                    <group attrs="{'invisible': [('company_name', 'in', ['Suds Premier Franchising Corp','Aquion Industrial Laundries'])]}">
                         <group string="For franchisee" name="franchisee_profile">
                             <field name="date_opened"/>
                             <field name="manager_name"/>

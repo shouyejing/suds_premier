@@ -1,6 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_branches_cost_center,branches.cost.center,model_branches_cost_center,project.group_project_user,1,1,1,1
-access_project_checklist_items,project.checklist.items,model_project_checklist_items,project.group_project_user,1,1,1,1
 access_annual_income,annual.income,model_annual_income,project.group_project_user,1,1,1,1
 access_children_info,children.info,model_children_info,project.group_project_user,1,1,1,1
 access_employment_info,employment.info,model_employment_info,project.group_project_user,1,1,1,1

@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+    <report 
+            id="action_report_saleorder_without_tax"
+            string="Quotation / Order without Tax"
+            model="sale.order" 
+            report_type="qweb-pdf"
+            file="report_saleorder_without_tax" 
+            name="report_saleorder_without_tax"
+            print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)"
+        />
+
+    </data>
+</odoo>
