@@ -8,7 +8,7 @@
     <field name="inherit_id" ref="stock.view_picking_form"/>
     <field name="arch" type="xml">
 	<div name="button_box" position="inside">
-        <button name="create_purchase_request" attrs="{'invisible': ['|','|', ('picking_type', 'not in', ['internal']),('purchase_request_id', 'not in', [False]), ('state', 'not in', ['waiting', 'confirmed', 'assigned'])]}"
+        <button name="create_purchase_request" attrs="{'invisible': ['|','|', ('picking_type', 'not in', ['internal', 'outgoing']),('purchase_request_id', 'not in', [False]), ('state', 'not in', ['waiting', 'confirmed', 'assigned'])]}"
           string="Create Purchase Request" type="object" class="oe_stat_button" icon="fa-clipboard-list" groups="base.group_user"/>
       </div>
       <field name="origin" position="after">
