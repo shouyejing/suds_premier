@@ -8,5 +8,6 @@ access_current_business,current.business,model_current_business,project.group_pr
 access_service_related,service.related,model_service_related,project.group_project_user,1,1,1,1
 access_experience_organization,experience.organization,model_experience_organization,project.group_project_user,1,1,1,1
 access_royalty_fee_month,royalty.fee.month,model_royalty_fee_month,base.group_user,1,1,1,1
+access_monthly_royalty_fees_line,monthly.royalty.fees.line,model_monthly_royalty_fees_line,base.group_user,1,1,1,1
 access_royalty_fee_reference,royalty.fee.reference,model_royalty_fee_reference,base.group_user,1,1,1,1
 access_aquion_department,aquion.department,model_aquion_department,base.group_user,1,1,1,1
