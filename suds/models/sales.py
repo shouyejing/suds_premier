@@ -213,4 +213,4 @@ class ProductAnalyticAccount(models.Model):
     _inherit='product.template'
 
     analytic_account_id = fields.Many2one('account.analytic.account', string="Analytic Account", domain="[('company_id', '=', company_id)]")
-    company_name = fields.Char(related="company_id.name", string="Company")
+    
