@@ -1,0 +1,4 @@
+[submodule "Agilis-Enterprise-Solutions/ninja-dashboard"]
+	path = Agilis-Enterprise-Solutions/ninja-dashboard
+	url = git@github.com:Agilis-Enterprise-Solutions/ninja-dashboard.git
+	branch = master
