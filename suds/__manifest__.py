@@ -9,10 +9,11 @@
     'sequence': 1,
     'version': '1.0',
     'depends': [
-        'base', 'project', 'analytic', 'purchase', 'sale', 'purchase_requisition', 'website_quote'
+        'base', 'project', 'analytic', 'ks_dashboard_ninja', 'purchase', 'purchase_request', 'sale', 'purchase_requisition', 'website_quote', 'account', 'account_accountant', 'itm_petty_cash'
         ],
     'data': [
         'security/ir.model.access.csv',
+        'security/security.xml',
         'wizard/royalty_fee_lines.xml',
         'wizard/sale_to_project.xml',
         'views/analytic_account.xml',

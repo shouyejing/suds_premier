@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Inherit Stock Picking Form for Transfers Menu -->
+    <record id="view_picking_form_inherited" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field eval="12" name="priority"/>
+        <field name="inherit_id" ref="stock.view_picking_form"></field>
+        <field name="arch" type="xml">
+            <!-- Check Availability -->
+            <xpath expr="//button[@name='action_assign']" position="attributes">
+                <attribute name="groups">base.group_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Validate -->
+            <xpath expr="//button[@name='button_validate']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Cancel -->
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="groups">base.group_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Scrap -->
+            <xpath expr="//button[@name='button_scrap']" position="attributes">
+                <attribute name="groups">suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Unlock -->
+            <xpath expr="//button[@name='action_toggle_is_locked'][1]" position="attributes">
+                <attribute name="groups">stock.group_stock_user,base.group_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Unreserve -->
+            <xpath expr="//button[@name='do_unreserve']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,base.group_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Create Purchase Request -->
+            <!-- <xpath expr="//sheet/div/button[@name='create_purchase_request']" position="attributes">
+                <attribute name="groups">suds.inventory_group_level_1</attribute>
+            </xpath> -->
+        </field>
+    </record>
+
+    <!-- Inherit View Inventory Form for Inventory Adjustments Menu -->
+    <record id="view_inventory_form_inherited" model="ir.ui.view">
+        <field name="name">stock.inventory.form</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"></field>
+        <field name="arch" type="xml">
+            <!-- Start Inventory -->
+            <xpath expr="//button[@name='action_start']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Validate Inventory -->
+            <xpath expr="//button[@name='action_done']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Cancel Inventory -->
+            <xpath expr="//button[@name='action_cancel_draft'][2]" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Stock Scrap Form for Scrap Menu -->
+    <record id="stock_scrap_form_view" model="ir.ui.view">
+        <field name="name">stock.scrap.form</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view"></field>
+        <field name="arch" type="xml">
+            <!-- Validate -->
+            <xpath expr="//button[@name='action_validate']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="stock_warn_insufficient_qty_form_view_inherit" model="ir.ui.view">
+        <field name="name">stock.warn.insufficient.qty</field>
+        <field name="model">stock.warn.insufficient.qty</field>
+        <field name="inherit_id" ref="stock.stock_warn_insufficient_qty_form_view"></field>
+        <field name="arch" type="xml">
+            <!-- Confirm -->
+            <xpath expr="//button[@name='action_done']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Discard -->
+            <xpath expr="//button[@name='cancel_button']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_procurement_compute_wizard_inherit" model="ir.ui.view">
+        <field name="name">Run Schedulers Manually</field>
+        <field name="model">stock.scheduler.compute</field>
+        <field name="inherit_id" ref="stock.view_procurement_compute_wizard"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='procure_calculation']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit stock_quantity_history_inherit Form for Inventory Menu -->
+    <record id="view_stock_quantity_history_inherit" model="ir.ui.view">
+        <field name="name">Inventory Report</field>
+        <field name="model">stock.quantity.history</field>
+        <field name="inherit_id" ref="stock.view_stock_quantity_history"></field>
+        <field name="arch" type="xml">
+            <!-- Retrieve the Inventory Quantities -->
+            <xpath expr="//button[@name='open_table']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Cancel -->
+            <xpath expr="//button[@special='cancel']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Inherit stock_quantity_history_inherit wizard Form for Inventory Menu -->
+    <record id="view_stock_quantity_history_wizard_inherit" model="ir.ui.view">
+        <field name="name">Valuation Report</field>
+        <field name="model">stock.quantity.history</field>
+        <field name="inherit_id" ref="stock_account.view_stock_quantity_history"></field>
+        <field name="arch" type="xml">
+            <!-- Retrieve the Inventory Quantities -->
+            <xpath expr="//button[@name='open_table']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Cancel -->
+            <xpath expr="//button[@special='cancel']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <!-- Create Purchase Request -->
+            <xpath expr="//button[@name='create_purchase_request']" position="attributes">
+                <attribute name="groups">suds.inventory_group_level_1</attribute>
+            </xpath>
+            <!-- Adding restrictions to the following buttons for group level 1 and 2 -->
+
+            <!-- removes Check Availability Button for group level 1 and 2 -->
+            <xpath expr="//button[@name='action_assign']" position="attributes">
+                <attribute name="groups">suds.inventory_group_level_1</attribute>
+            </xpath>
+
+            <!-- removes Validate Button for group level 1 and 2 -->
+            <xpath expr="//button[@name='button_validate']" position="attributes">
+                <attribute name="groups">suds.inventory_group_level_1</attribute>
+            </xpath>
+
+            <!-- removes Cancel Button for group level 1 and 2 -->
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="groups">suds.inventory_group_level_1</attribute>
+            </xpath>
+
+            <!-- removes Scrap Button for group level 1 and 2 -->
+            <xpath expr="//button[@name='button_scrap']" position="attributes">
+                <attribute name="groups">suds.inventory_group_level_1</attribute>
+            </xpath>
+
+            <!-- removes Lock Button for group level 1 and 2 -->
+            <xpath expr="//button[@name='action_toggle_is_locked'][1]" position="attributes">
+                <attribute name="groups">suds.inventory_group_level_1</attribute>
+            </xpath>
+
+            <!-- removes Unlock Button for group level 1 and 2 -->
+            <xpath expr="//button[@name='action_toggle_is_locked'][2]" position="attributes">
+                <attribute name="groups">suds.inventory_group_level_1</attribute>
+            </xpath>
+
+            <!-- <xpath expr="//button[@name='do_print_picking']" position="attributes">
+             <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1,suds.group_level_2</attribute>
+             </xpath> -->
+
+            <!-- removes Print Button for group level 1 and 2 -->
+            <xpath expr="//form/header/button[last()-6]" position="attributes">
+                <attribute name="groups">stock.group_stock_user,suds.inventory_group_level_1</attribute>
+            </xpath>
+        </field>
+
+    </record>
+
+
+</odoo>

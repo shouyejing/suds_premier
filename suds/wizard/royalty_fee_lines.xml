@@ -25,8 +25,9 @@
                             <group colspan="2">
                                 <button name="make_royalty_line_invoice"
                                         string="Create Invoice" type="object"
-                                        class="oe_highlight"/>
-                                <button special="cancel" string="Cancel" class="oe_link"/>
+                                        class="oe_highlight"
+                                        groups="suds.sales_group_level_2"/>
+                                <button special="cancel" string="Cancel" class="oe_link" groups="suds.sales_group_level_2"/>
                             </group>
                         </footer>
                     </sheet>

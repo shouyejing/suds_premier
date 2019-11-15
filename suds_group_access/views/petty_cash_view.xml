@@ -1,0 +1,34 @@
+<odoo>
+    <!-- Inherit Petty_cash_form for L1 and L2 access -->
+    <record id="view_petty_cash_form_inherited" model="ir.ui.view">
+        <field name="name">petty.cash.form</field>
+        <field name="model">petty.cash</field>
+        <field name="inherit_id" ref="itm_petty_cash.view_petty_cash_form"/>
+        <field name="arch" type="xml">
+            <!-- Request Cash Dispatch -->
+            <xpath expr="//button[@name='do_request']" position="attributes">
+                <attribute name="groups">suds.accounting_group_level_1</attribute>
+            </xpath>
+            <!-- Cash Dispatch -->
+            <xpath expr="//button[@name='do_cash_dispatch']" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+            <!-- Reconcile -->
+            <xpath expr="//button[3]" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+            <!-- Pay -->
+            <xpath expr="//button[@name='do_pay']" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+            <!-- Request to Reconcile -->
+            <xpath expr="//button[@name='do_to_reconcile']" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+            <!-- add an item in Petty Cash Line -->
+            <!-- <xpath expr="//notebook/page[1]/field/tree" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath> -->
+        </field>
+    </record>
+</odoo>

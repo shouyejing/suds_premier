@@ -21,8 +21,12 @@
                             <group colspan="2">
                                 <button name="confirm_quotations"
                                         string="Confirm Quotations" type="object"
-                                        class="oe_highlight"/>
-                                <button special="cancel" string="Cancel" class="oe_link"/>
+                                        class="oe_highlight"
+                                        groups="suds.sales_group_level_1"/>
+                                <button special="cancel" 
+                                        string="Cancel" 
+                                        class="oe_link" 
+                                        groups="suds.sales_group_level_1"/>
                             </group>
                         </footer>
                     </sheet>
