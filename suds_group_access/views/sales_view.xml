@@ -51,6 +51,10 @@
                 <attribute name="groups">suds.sales_group_level_1</attribute>
             </xpath>
             <!-- Removes Confirm Sale Button if user not in Groups L2 -->
+            <xpath expr="//header/button[@name='action_confirm'][1]" position="attributes">
+                <attribute name="groups">suds.sales_group_level_2</attribute>
+            </xpath>
+            <!-- Removes Confirm Sale Button if user not in Groups L2 -->
             <xpath expr="//header/button[@name='action_confirm'][2]" position="attributes">
                 <attribute name="groups">suds.sales_group_level_2</attribute>
             </xpath>
