@@ -7,10 +7,10 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-
-            <field name="name" position="after">
-               <strong> - </strong> <field name="business_name" placeholder="Business Name"/>
-            </field>
+                <field name="name" position="after">
+                    <strong> - </strong>
+                    <field name="business_name" placeholder="Business Name"/>
+                </field>
 
                 <div class="oe_title" position="inside">
                     <field name="branch_id" placeholder="Branch"/>
@@ -23,7 +23,6 @@
                             <field name="manager_name"/>
                             <field name="manager_contact_no"/>
                             <field name="manager_email_address"/>
-                            
                         </group>
 
                         <group>
@@ -32,17 +31,28 @@
                             <field name="shop_mobile"/>
                         </group>
                     </group>
-<!-- attrs="{'invisible': [('company_name', 'not ilike', 'SUDS Premiere')]}"-->
+                    <!-- attrs="{'invisible': [('company_name', 'not ilike', 'SUDS Premiere')]}"-->
                     <group>
-                    <group string="Social Network Accounts" name="franchisee_social_accounts" attrs="{'invisible': [('company_name', 'in', ['SUDS Premiere','Aquion'])]}">
-                        <field name="fb_page"/>
-                        <field name="instagram_account"/>
-                        <field name="twitter_account"/>
-                    </group>
+                        <group string="Social Network Accounts" name="franchisee_social_accounts" attrs="{'invisible': [('company_name', 'in', ['SUDS Premiere','Aquion'])]}">
+                            <field name="fb_page"/>
+                            <field name="instagram_account"/>
+                            <field name="twitter_account"/>
+                        </group>
 
-                    <group></group>
+                        <group></group>
                     </group>
                 </notebook>
+            </field>
+        </record>
+
+        <record id="account_view_partner_property_form_inherit" model="ir.ui.view">
+            <field name="name">account.partner.property.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='trust']" position="after">
+                    <field name="tax_type" attrs="{'readonly': [('tax_type', '=', 'registered')]}" force_save="1"/>
+                </xpath>
             </field>
         </record>
     </data>

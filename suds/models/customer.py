@@ -4,8 +4,14 @@ from odoo.exceptions import UserError
 import logging
 _logger = logging.getLogger(__name__)
 
+
 class FranchiseeProfile(models.Model):
-    _inherit='res.partner'
+    _inherit = 'res.partner'
+
+    TAX_TYPE = [
+        ('registered', 'VAT REGISTERED'),
+        ('non_vat', 'NON VAT'),
+    ]
 
     date_opened = fields.Date(string="Date Opened")
     manager_name = fields.Char(string="Manager/Partner Name")
@@ -20,3 +26,5 @@ class FranchiseeProfile(models.Model):
     branch_id = fields.Many2one('branches.cost.center', string="Branch")
     business_name = fields.Char(string="Business Name")
     company_name = fields.Char(related="parent_id.name")
+    tax_type = fields.Selection(
+        TAX_TYPE, string="Tax Type", default="non_vat",required=True)

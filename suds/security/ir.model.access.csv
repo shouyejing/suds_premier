@@ -11,3 +11,4 @@ access_royalty_fee_month,royalty.fee.month,model_royalty_fee_month,base.group_us
 access_monthly_royalty_fees_line,monthly.royalty.fees.line,model_monthly_royalty_fees_line,base.group_user,1,1,1,1
 access_royalty_fee_reference,royalty.fee.reference,model_royalty_fee_reference,base.group_user,1,1,1,1
 access_aquion_department,aquion.department,model_aquion_department,base.group_user,1,1,1,1
+access_petty_cash,petty.cash,model_petty_cash,base.group_user,1,1,1,1

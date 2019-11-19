@@ -38,23 +38,23 @@
             <xpath expr="//header/button[1]" position="attributes">
                 <attribute name="groups">suds.sales_group_level_1</attribute>
             </xpath>
-            <!-- Removes Send By Email Button if user not in Groups L2 -->
+            <!-- Removes Email Button if user not in Groups L2 -->
             <xpath expr="//header/button[last()-4]" position="attributes">
                 <attribute name="groups">suds.sales_group_level_1</attribute>
             </xpath>
-            <!-- Removes Send By Email Button if user not in Groups L2 -->
+            <!-- Removes Email Button if user not in Groups L2 -->
             <xpath expr="//header/button[@name='action_cancel']" position="attributes">
                 <attribute name="groups">suds.sales_group_level_1</attribute>
             </xpath>
-            <!-- Removes Send By Print Button if user not in Groups L2 -->
+            <!-- Removes Print Button if user not in Groups L2 -->
             <xpath expr="//header/button[last()-5]" position="attributes">
                 <attribute name="groups">suds.sales_group_level_1</attribute>
             </xpath>
-            <!-- Removes Send By Confirm Sale Button if user not in Groups L2 -->
-            <xpath expr="//header/button[9]" position="attributes">
+            <!-- Removes Confirm Sale Button if user not in Groups L2 -->
+            <xpath expr="//header/button[@name='action_confirm'][2]" position="attributes">
                 <attribute name="groups">suds.sales_group_level_2</attribute>
             </xpath>
-            <!-- Removes Send By Lock Button if user not in Groups L2 -->
+            <!-- Removes Lock Button if user not in Groups L2 -->
             <xpath expr="//header/button[@name='action_done']" position="attributes">
                 <attribute name="groups">suds.sales_group_level_1</attribute>
             </xpath>
