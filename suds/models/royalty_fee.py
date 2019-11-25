@@ -56,7 +56,6 @@ class MonthlyRoyaltyFeeLines(models.Model):
         for i in self:
             i.gross_amount = i.total_revenue + \
                 i.other_additions - i.other_deductions - i.sales_tax
-            print("Hello")
 
     @api.depends('gross_amount')
     def compute_royalty_fee(self):

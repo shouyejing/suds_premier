@@ -32,7 +32,9 @@ class RoyaltyFeetoInvoice(models.TransientModel):
         request_line_obj = self.env['monthly.royalty.fees.line']
         request_line_ids = self.env.context.get('active_ids')
         active_model = self.env.context.get('active_model')
-
+        
+        partner = self.env['monthly.royalty.fees.line'].browse(self._context.get('active_id')).customer_id.id
+        
         if not request_line_ids:
             return res
         assert active_model == 'monthly.royalty.fees.line', \
@@ -42,6 +44,7 @@ class RoyaltyFeetoInvoice(models.TransientModel):
         for line in request_line_obj.browse(request_line_ids):
             items.append([0, 0, self._prepare_item(line)])
         res['royalty_fee_to_invoice_ids'] = items
+        res['partner_id'] =  partner
         return res
 
 
