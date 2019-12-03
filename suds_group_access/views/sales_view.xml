@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit Action -->
+    <!-- <record id="sale.action_view_sale_advance_payment_inv" model="ir.actions.act_window"> -->
+    <!-- <field name="name">Invoice Order</field> -->
+    <!-- <field name="groups_id" eval="[(4,ref('suds.sales_group_level_1'))]"/> -->
+    <!-- <field name="groups">suds.sales_group_level_1,suds.group_level_2</field> -->
+
+    <!-- </record> -->
+
+
+    <!-- Inherit Form view -->
+    <record id="create_invoice_button_group_view_form" model="ir.ui.view">
+        <field name="name">Invoice Orders</field>
+        <field name="model">sale.advance.payment.inv</field>
+        <field name="inherit_id" ref="sale.view_sale_advance_payment_inv"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='create_invoices']" position="attributes">
+                <attribute name="groups">suds.sales_group_level_1</attribute>
+            </xpath>
+            <xpath expr="//button[last()-1]" position="attributes">
+                <attribute name="groups">suds.sales_group_level_1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Inherit Form view -->
+    <record id="sale_order_view_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+
+            <!-- Removes Create Invoice Button if user not in Groups L2 -->
+            <xpath expr="//header/button[1]" position="attributes">
+                <attribute name="groups">suds.sales_group_level_1</attribute>
+            </xpath>
+            <!-- Removes Email Button if user not in Groups L2 -->
+            <xpath expr="//header/button[last()-4]" position="attributes">
+                <attribute name="groups">suds.sales_group_level_1</attribute>
+            </xpath>
+            <!-- Removes Email Button if user not in Groups L2 -->
+            <xpath expr="//header/button[@name='action_cancel']" position="attributes">
+                <attribute name="groups">suds.sales_group_level_1</attribute>
+            </xpath>
+            <!-- Removes Print Button if user not in Groups L2 -->
+            <xpath expr="//header/button[last()-5]" position="attributes">
+                <attribute name="groups">suds.sales_group_level_1</attribute>
+            </xpath>
+            <!-- Removes Confirm Sale Button if user not in Groups L2 -->
+            <xpath expr="//header/button[@name='action_confirm'][1]" position="attributes">
+                <attribute name="groups">suds.sales_group_level_2</attribute>
+            </xpath>
+            <!-- Removes Confirm Sale Button if user not in Groups L2 -->
+            <xpath expr="//header/button[@name='action_confirm'][2]" position="attributes">
+                <attribute name="groups">suds.sales_group_level_2</attribute>
+            </xpath>
+            <!-- Removes Lock Button if user not in Groups L2 -->
+            <xpath expr="//header/button[@name='action_done']" position="attributes">
+                <attribute name="groups">suds.sales_group_level_1</attribute>
+            </xpath>
+            <!-- Removes Create Project if user not in Groups L2 -->
+            <xpath expr="//header/button[6]" position="attributes">
+                <attribute name="groups">suds.sales_group_level_1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    
+
+</odoo>

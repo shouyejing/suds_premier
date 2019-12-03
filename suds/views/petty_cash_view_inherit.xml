@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- petty cash form view inherit  -->
+    <record id="view_petty_cash_form_inherit" model="ir.ui.view">
+        <field name="name">petty.cash.form</field>
+        <field name="model">petty.cash</field>
+        <field name="inherit_id" ref="itm_petty_cash.view_petty_cash_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='petty_credit_account_id']" position="after">
+                <field name="reason"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

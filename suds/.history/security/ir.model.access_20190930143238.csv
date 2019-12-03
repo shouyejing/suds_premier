@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_branches_cost_center,branches.cost.center,model_branches_cost_center,project.group_project_user,1,1,1,1
+access_annual_income,annual.income,model_annual_income,project.group_project_user,1,1,1,1
+access_children_info,children.info,model_children_info,project.group_project_user,1,1,1,1
+access_employment_info,employment.info,model_employment_info,project.group_project_user,1,1,1,1
+access_previous_business,previous.business,model_previous_business,project.group_project_user,1,1,1,1
+access_current_business,current.business,model_current_business,project.group_project_user,1,1,1,1
+access_service_related,service.related,model_service_related,project.group_project_user,1,1,1,1
+access_experience_organization,experience.organization,model_experience_organization,project.group_project_user,1,1,1,1
+access_monthly_royalty_fees_line,monthly.royalty.fees.line,model_monthly_royalty_fees_line,base.group_user,1,1,1,1
+access_royalty_fees_line,royalty.fees.line,model_royalty_fees_line,base.group_user,1,1,1,1
+access_royalty_fee_month,royalty.fee.month,model_royalty_fee_month,base.group_user,1,1,1,1
+access_royalty_fee_reference,royalty.fee.reference,model_royalty_fee_reference,base.group_user,1,1,1,1
+access_aquion_department,aquion.department,model_aquion_department,base.group_user,1,1,1,1

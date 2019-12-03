@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form view -->
+        <record id="sales_analytic_account_view_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="website_quote.sale_order_form_quote"/>
+            <field name="arch" type="xml">
+                <button name="action_confirm" position="before">
+                    <button name="%(action_create_project_from_sales)d" class="btn-primary" attrs="{'invisible': [('is_associated_with_project', '=', False)]}" type="action" string="Create Project" states="sale"/>
+                </button>
+
+                <button name="action_confirm" position="attributes">
+                    <attribute name="groups">sale_management.sales_team.group_sale_manager</attribute>
+                </button>
+
+                <button id="action_confirm" position="attributes">
+                    <attribute name="groups">sale_management.sales_team.group_sale_manager</attribute>
+                </button>
+
+
+                <field name="analytic_account_id" position="replace"/>
+
+                <field name="partner_id" position="after">
+                    <field name="analytic_account_id" domain="[('company_id', '=', company_id)]"/>
+                    <field name='branch_id' attrs="{'invisible': [('company_name', 'in', ['Suds Premier Franchising Corp','Aquion Industrial Laundries'])]}"/>
+                    <field name='company_name' invisible="1"/>
+                </field>
+
+                <field name="payment_term_id" position="after">
+                    <field name="is_associated_with_project" attrs="{'invisible': [('company_name', 'not in', ['Suds Premier Franchising Corp'])]}"/>
+                    <field name="project_id" readonly="1" attrs="{'invisible': [('company_name', 'not in', ['Suds Premier Franchising Corp'])]}"/>
+                </field>
+
+                
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                    <field name="date_of_pickup" attrs="{'column_invisible': [('parent.company_name', 'not in', ['Aquion Industrial Laundries'])]}"/>
+                    <field name="shift" attrs="{'column_invisible': [('parent.company_name', 'not in', ['Aquion Industrial Laundries'])]}"/>
+                    <field name="delivery_date" attrs="{'column_invisible': [('parent.company_name', 'not in', ['Aquion Industrial Laundries'])]}"/>
+                    <field name="department_id" attrs="{'column_invisible': [('parent.company_name', 'not in', ['Aquion Industrial Laundries'])]}"/>
+                </xpath>
+                
+                
+            </field>
+        </record>
+
+        <!-- Inherit Form view -->
+        <record id="confirm_button_group_view_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <button name="action_confirm" position="attributes">
+                    <attribute name="groups">sales_team.group_sale_manager</attribute>
+                </button>
+            </field>
+        </record>
+
+        <!-- Inherit Form view -->
+        <record id="sales_invoice_royalty_fee_view_form" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="payment_term_id" position="after">
+                    <field name="is_royalty_fee"/>
+                    <field name="received_by"/>
+                </field>
+
+                <field name="product_id" position="after">
+                    <field name="month" attrs="{'column_invisible': [('parent.is_royalty_fee', '=', False)]}"/>
+                </field>
+
+                
+
+                <!-- <field name="invoice_line_ids" position="attributes">
+                    <attribute name="context">{'default_delivery_date':delivery_date,
+                                                'default_date_of_pickup': date_of_pickup,
+                                                'default_shift': shift,
+                                                'default_department_id': department_id}</attribute>
+                </field> -->
+
+                <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="after">
+                    <field name="date_of_pickup" attrs="{'column_invisible': [('parent.company_name', 'not in', ['Aquion Industrial Laundries'])]}"/>
+                    <field name="shift" attrs="{'column_invisible': [('parent.company_name', 'not in', ['Aquion Industrial Laundries'])]}"/>
+                    <field name="delivery_date" attrs="{'column_invisible': [('parent.company_name', 'not in', ['Aquion Industrial Laundries'])]}"/>
+                    <field name="department_id" attrs="{'column_invisible': [('parent.company_name', 'not in', ['Aquion Industrial Laundries'])]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="sales_order_pivot_view_id" model="ir.ui.view">
+            <field name="name">sale.order.inherit.view.pivot</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sale_order_pivot"/>
+            <field name="arch" type="xml">
+                <field name="amount_total" position="after">
+                    <field name="order_line" type="measure"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Inherit Form view -->
+        <record id="product_analytic_view_form" model="ir.ui.view">
+            <field name="name">product.template.common.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="type" position="before">
+                    <field name="analytic_account_id" domain="[('company_id', '=', company_id)]"/>
+                    <field name='company_name' invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="sale_order_line_view_pivot" model="ir.ui.view">
+            <field name="name">sale.order.line.view.pivot</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <pivot string="Sales Order Line" disable_linking="true">
+                    <field name="order_id" type="row"/>
+                    <field name="product_id" type="row"/>
+                    <field name="date_of_pickup" type="measure"/>
+                    <field name="shift" type="measure"/>
+                    <field name="delivery_date" type="measure"/>
+                    <field name="department_id" type="measure"/>
+                    <field name="product_uom_qty" type="measure"/>
+                    <field name="product_uom" type="measure"/>
+                    <field name="price_unit" type="measure"/>
+                    <field name="price_subtotal" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+        
+        <record id="sale_order_line_action_form" model="ir.actions.act_window">
+            <field name="name">Sales Order Line</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_mode">pivot</field>
+        </record>
+
+        <menuitem id="menu_sale_order_line_pivot" name="Sales Order Line" parent="sale.sale_order_menu" action="sale_order_line_action_form"/>
+
+    </data>
+</odoo>
+
+

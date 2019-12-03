@@ -1,0 +1,16 @@
+<odoo>
+    <!-- Inherit Form for Lock Dates -->
+    <record id="view_account_change_lock_date_inherit" model="ir.ui.view">
+        <field name="name">account.change.lock.date.form</field>
+        <field name="model">account.change.lock.date</field>
+        <field name="inherit_id" ref="account_accountant.view_account_change_lock_date" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='change_lock_date']" position="attributes">
+                <attribute name="groups">suds.accounting_group_level_2</attribute>
+            </xpath>
+            <xpath expr="//button[@class='btn-default']" position="attributes">
+                <attribute name="groups">suds.accounting_group_level_2</attribute>
+            </xpath>            
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form view -->
+        <record id="project_stages_view_form_simplified" model="ir.ui.view">
+            <field name="name">project.stages.form.simplified</field>
+            <field name="model">project.stages</field>
+            <field name="arch" type="xml">
+                <form string="Proejct Stages">
+                    <sheet>
+                        <group>
+                            <field name="stage_name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

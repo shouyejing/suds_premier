@@ -1,0 +1,139 @@
+<odoo>
+    <!-- Inherit Purchase Order Form  -->
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="target">inline</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Send RFQ by Email -->
+            <xpath expr="//button[1]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user,suds.purchase_group_level_1</attribute>
+            </xpath>
+            <!-- Print RFQ -->
+            <xpath expr="//button[@name='print_quotation']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user,suds.purchase_group_level_1</attribute>
+            </xpath>
+            <!-- Submit -->
+            <xpath expr="//button[4]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user,suds.purchase_group_level_1</attribute>
+            </xpath>
+            <!-- Cancel -->
+            <xpath expr="//button[@name='button_cancel']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_manager,suds.purchase_group_level_2</attribute>
+            </xpath>
+            <!-- Set to Draft -->
+            <xpath expr="//button[@name='button_draft']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_manager,suds.purchase_group_level_2</attribute>
+            </xpath>
+            <!-- Approve Order -->
+            <xpath expr="//button[@name='button_approve']" position="attributes">
+                <attribute name="groups">suds.purchase_group_level_2,purchase.group_purchase_manager</attribute>
+            </xpath>
+            <!-- Unlock -->
+            <xpath expr="//button[@name='button_unlock']" position="attributes">
+                <attribute name="groups">suds.purchase_group_level_2,purchase.group_purchase_manager</attribute>
+            </xpath>
+            <!-- Shipment -->
+            <xpath expr="//div[1]/button[@name='action_view_picking']" position="attributes">
+                <attribute name="groups">suds.purchase_group_level_2,purchase.group_purchase_manager</attribute>
+            </xpath>
+            <!-- Vendor Bills -->
+            <xpath expr="//div[1]/button[@name='action_view_invoice']" position="attributes">
+                <attribute name="groups">suds.purchase_group_level_2,purchase.group_purchase_manager</attribute>
+            </xpath>
+
+
+        </field>
+    </record>
+
+    <!-- Inherit Purchase Agreements Form  -->
+    <record id="view_purchase_requisition_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.requisition.form</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Confirm -->
+            <xpath expr="//button[@name='action_in_progress']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_manager,suds.purchase_group_level_2</attribute>
+            </xpath>
+            <!-- Cancel -->
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_manager,suds.purchase_group_level_2</attribute>
+            </xpath>
+            <!-- Reset to Draft -->
+            <xpath expr="//button[@name='action_draft']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_manager,suds.purchase_group_level_2</attribute>
+            </xpath>
+            <!-- Create New Quotation -->
+            <xpath expr="//button[1]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user,suds.purchase_group_level_1</attribute>
+            </xpath>
+            <!-- Create New Quotation -->
+            <xpath expr="//button[2]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user,suds.purchase_group_level_1</attribute>
+            </xpath>
+            <!-- Validate -->
+            <xpath expr="//button[@name='action_open']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user,suds.purchase_group_level_1</attribute>
+            </xpath>
+            <!-- Done -->
+            <xpath expr="//button[@name='action_done']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user,suds.purchase_group_level_1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Purchase Requests Form  -->
+    <record id="view_purchase_request_form_inherit" model="ir.ui.view">
+        <field name="name">sprogroup.purchase.request.form</field>
+        <field name="model">sprogroup.purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
+        <field name="arch" type="xml">
+            <!-- Request Approval -->
+            <xpath expr="//button[@name='button_to_approve']" position="attributes">
+                <attribute name="groups">suds.purchase_group_level_1</attribute>
+            </xpath>
+            <!-- Leader Approve -->
+            <xpath expr="//button[@name='button_leader_approved']" position="attributes">
+                <attribute name="groups">base.group_user,suds.purchase_group_level_1</attribute>
+            </xpath>
+            <!-- Manager Approve -->
+            <xpath expr="//button[@name='button_manager_approved']" position="attributes">
+                <attribute name="groups">purchase_request.group_purchase_request_manager,suds.purchase_group_level_2</attribute>
+            </xpath>
+            <!-- Reject -->
+            <xpath expr="//button[@name='button_rejected']" position="attributes">
+                <attribute name="groups">suds.purchase_group_level_2</attribute>
+            </xpath>
+            <!-- Reset -->
+            <xpath expr="//button[@name='button_draft']" position="attributes">
+                <attribute name="groups">purchase_request.group_purchase_request_manager,suds.purchase_group_level_2</attribute>
+            </xpath>
+            <!-- Create Purchase Order -->
+            <xpath expr="//button[@name='make_purchase_quotation']" position="attributes">
+                <attribute name="groups">purchase_request.group_purchase_request_manager,suds.purchase_group_level_2</attribute>
+            </xpath>
+            <!-- Create Purchase Agreement -->
+            <xpath expr="//button[5]" position="attributes">
+                <attribute name="groups">purchase_request.group_purchase_request_manager,suds.purchase_group_level_1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit purchase_requisition_view_form -->
+    <record id="do_purchase_requisition_view_form_inherit" model="ir.ui.view">
+        <field name="name">do.purchase.requisition.form</field>
+        <field name="model">do.purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_request.do_purchase_requisition_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='create_purchase_requisition']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user,suds,suds.purchase_group_level_1</attribute>
+            </xpath>
+            <xpath expr="//button[@special='cancel']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user,suds,suds.purchase_group_level_1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

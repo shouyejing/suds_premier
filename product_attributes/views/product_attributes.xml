@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <!-- Item Type action buttons -->
+    <act_window id="product_attributes_action_open_item_type" name="Item Types"
+      res_model="product.template" view_type="form" view_mode="kanban,form,tree"
+      domain="[('product_item_type_id', '=', active_id)]"/>
+
+    <act_window id="action_open_single_item_type" name="Item Types"
+      res_model="product.item.type" view_type="form" view_mode="kanban,form,tree"
+      target="current" domain="[('product_ids', 'in', active_id)]"/>
+
+    <!-- Item Type -->
+    <record id="product_attributes_product_item_type_search_form_view" model="ir.ui.view">
+      <field name="name">product.attributes.product.item.type.search.form</field>
+      <field name="model">product.item.type</field>
+      <field name="arch" type="xml">
+        <search string="Item Type">
+          <field name="name"/>
+          <field name="partner_id"/>
+        </search>
+      </field>
+    </record>
+    <record id="product_attributes_view_product_item_type_form" model="ir.ui.view">
+      <field name="name">product.attribute.product.item.type.form</field>
+      <field name="model">product.item.type</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button name="%(product_attributes_action_open_item_type)d" type="action" class="oe_stat_button" icon="fa-cubes">
+                <field name="products_count" widget="statinfo" string="Products"/>
+              </button>
+            </div>
+            <field name="logo" widget="image" class="oe_avatar"/>
+            <div class="oe_title">
+              <label for="name" string="Item Type" class="oe_edit_only"/>
+              <h1><field name="name"/></h1>
+            </div>
+            <group>
+              <group>
+                <field name="partner_id"/>
+              </group>
+            </group>
+            <group string="Description">
+              <field name="description" nolabel="1"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <record id="product_attributes_view_product_item_type_tree" model="ir.ui.view">
+      <field name="name">product.attribute.product.item.type.tree</field>
+      <field name="model">product.item.type</field>
+      <field name="arch" type="xml">
+        <tree string="Item Types">
+          <field name="name"/>
+          <field name="description"/>
+          <field name="partner_id"/>
+        </tree>
+      </field>
+    </record>
+    <record id="product_attributes_view_product_item_type_kanban" model="ir.ui.view">
+      <field name="name">product.attribute.product.item.type.kanban</field>
+      <field name="model">product.item.type</field>
+      <field name="arch" type="xml">
+        <kanban>
+          <field name="id"/>
+          <field name="logo"/>
+          <field name="products_count"/>
+          <field name="description"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div class="oe_kanban_vignette oe_semantic_html_override">
+                <a type="open">
+                    <img t-att-src="kanban_image('product.item.type', 'logo', record.id.raw_value)" class="oe_kanban_image"/>
+                </a>
+                <div class="oe_kanban_details">
+                  <h4>
+                    <a type="open">
+                      <field name="name"/>
+                    </a>
+                  </h4>
+                  <div>
+                    <a name="%(product_attributes.product_attributes_action_open_item_type)d" type="action">
+                      <t t-esc="record.products_count.value"/> Products
+                    </a>
+                  </div>
+                  <span>
+                    <t t-esc="record.description.value.substr(0,200)"/>
+                    <t t-if="record.description.value.length > 200">
+                      <a type="open"><b>...</b></a>
+                    </t>
+                  </span>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+    <record id="product_attributes_view_product_template_search_item_type" model="ir.ui.view">
+      <field name="name">product.attributes.product.template.search.item.type</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_search_view"/>
+      <field name="arch" type="xml">
+        <field name="name" position="after">
+          <field name="product_item_type_id"/>
+          <filter string="Item Type" name="groupby_item_type" domain="[]" context="{'group_by':'product_item_type_id'}"/>
+          <separator/>
+        </field>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="product_attributes_action_product_item_type">
+        <field name="name">Item Types</field>
+        <field name="res_model">product.item.type</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,form,tree</field>
+    </record>
+    <menuitem id="menu_product_item_type" name="Item Types" action="product_attributes_action_product_item_type"
+      parent="sale.prod_config_main" sequence="3"/>
+
+
+    <!-- Generic Product action buttons -->
+    <act_window id="product_attributes_action_open_generic_products" name="Generic Products"
+      res_model="product.template" view_type="form" view_mode="kanban,form,tree"
+      domain="[('product_generic_id', '=', active_id)]"/>
+
+    <act_window id="action_open_single_product_generic" name="Generic Products"
+      res_model="product.generic" view_type="form" view_mode="kanban,form,tree"
+      target="current" domain="[('product_ids', 'in', active_id)]"/>
+
+    <!-- Generic Product -->
+    <record id="product_attributes_product_generic_search_form_view" model="ir.ui.view">
+      <field name="name">product.attributes.product.generic.search.form</field>
+      <field name="model">product.generic</field>
+      <field name="arch" type="xml">
+        <search string="Product Generic Name">
+          <field name="name"/>
+          <field name="partner_id"/>
+        </search>
+      </field>
+    </record>
+    <record id="product_attributes_view_product_generic_form" model="ir.ui.view">
+      <field name="name">product.attribute.product.generic.form</field>
+      <field name="model">product.generic</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button name="%(product_attributes_action_open_generic_products)d" type="action" class="oe_stat_button" icon="fa-cubes">
+                <field name="products_count" widget="statinfo" string="Products"/>
+              </button>
+            </div>
+            <field name="logo" widget="image" class="oe_avatar"/>
+            <div class="oe_title">
+              <label for="name" string="Generic Name" class="oe_edit_only"/>
+              <h1><field name="name"/></h1>
+            </div>
+            <group>
+              <group>
+                <field name="partner_id"/>
+              </group>
+            </group>
+            <group string="Description">
+              <field name="description" nolabel="1"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <record id="product_attributes_view_product_generic_tree" model="ir.ui.view">
+      <field name="name">product.attribute.product.generic.tree</field>
+      <field name="model">product.generic</field>
+      <field name="arch" type="xml">
+        <tree string="Product Generic">
+          <field name="name"/>
+          <field name="description"/>
+          <field name="partner_id"/>
+        </tree>
+      </field>
+    </record>
+    <record id="product_attributes_view_product_generic_kanban" model="ir.ui.view">
+      <field name="name">product.attribute.product.generic.kanban</field>
+      <field name="model">product.generic</field>
+      <field name="arch" type="xml">
+        <kanban>
+          <field name="id"/>
+          <field name="logo"/>
+          <field name="products_count"/>
+          <field name="description"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div class="oe_kanban_vignette oe_semantic_html_override">
+                <a type="open">
+                    <img t-att-src="kanban_image('product.generic', 'logo', record.id.raw_value)" class="oe_kanban_image"/>
+                </a>
+                <div class="oe_kanban_details">
+                  <h4>
+                    <a type="open">
+                      <field name="name"/>
+                    </a>
+                  </h4>
+                  <div>
+                    <a name="%(product_attributes.product_attributes_action_open_generic_products)d" type="action">
+                      <t t-esc="record.products_count.value"/> Products
+                    </a>
+                  </div>
+                  <span>
+                    <t t-esc="record.description.value.substr(0,200)"/>
+                    <t t-if="record.description.value.length > 200">
+                      <a type="open"><b>...</b></a>
+                    </t>
+                  </span>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+    <record id="product_attributes_view_product_template_search_generic" model="ir.ui.view">
+      <field name="name">product.attributes.product.template.search.generic</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_search_view"/>
+      <field name="arch" type="xml">
+        <field name="name" position="after">
+          <field name="product_generic_id"/>
+          <filter string="Generic Name" name="groupby_generic" domain="[]" context="{'group_by':'product_generic_id'}"/>
+          <separator/>
+        </field>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="product_attributes_action_product_generic">
+        <field name="name">Generic</field>
+        <field name="res_model">product.generic</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,form,tree</field>
+    </record>
+    <menuitem id="menu_product_generic" name="Generic Products" action="product_attributes_action_product_generic"
+      parent="sale.prod_config_main" sequence="3"/>
+
+    <!-- Product Template from Product Brand Form Inherit -->
+    <record id="product_attributes_product_brand_product_template_form_inherit" model="ir.ui.view">
+      <field name="name">product.attributes.product.brand.product.template.inherit.form</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product_brand.product_template_form_brand_add"/>
+      <field name="arch" type="xml">
+        <field name="product_brand_id" position="replace"/>
+        <xpath expr="//div[@name='options']/div[1]" position="before">
+          <div>
+            <label for="product_generic_id" string="Generic Name:" />
+            <field name="product_generic_id" placeholder="Generic Name"/>
+          </div>
+          <div>  
+            <label for="product_item_type_id" string="Item Type:" class="oe_inline"/>
+            <field name="product_item_type_id" class="oe_inline" placeholder="Item Type"/>
+            <label for="product_brand_id" string="Brand:" />
+            <field name="product_brand_id" placeholder="Brand Name"/>
+          </div>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Product Template Kanban Inherit -->
+    <record id="product_attributes_product_template_kanban_inherit" model="ir.ui.view">
+      <field name="name">product.attributes.product.template.inherit.kanban</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_kanban_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('oe_kanban_details')]/strong[1]" position="after">
+          <div>
+            <a t-if="record.product_item_type_id" type="action" name="%(action_open_single_item_type)d">
+              <field name="product_item_type_id"/>
+            </a>
+          </div>
+          <div>
+            <a t-if="record.product_generic_id" type="action" name="%(action_open_single_product_generic)d">
+              <field name="product_generic_id"/>
+            </a>
+          </div>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Product Product Kanban Inherit -->
+    <record id="product_attributes_product_product_kanban_inherit" model="ir.ui.view">
+      <field name="name">product.attributes.product.template.inherit.kanban</field>
+      <field name="model">product.product</field>
+      <field name="inherit_id" ref="product.product_kanban_view" />
+      <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('oe_kanban_details')]/strong[1]" position="after">
+          <div>
+            <a t-if="record.product_item_type_id" type="open">
+              <field name="product_item_type_id"/>
+            </a>
+          </div>
+          <div>
+            <a t-if="record.product_generic_id" type="open">
+              <field name="product_generic_id"/>
+            </a>
+          </div>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Product Template Form Inherit -->
+    <record id="product_attributes_product_template_form_inherit" model="ir.ui.view">
+      <field name="name">product.attributes.product.template.inherit.form</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_form_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//page[@name='general_information']/group/group[2]" position="after">
+          <group name="dimensions">
+            <label for="size"/>
+            <div>
+              <field name="size" class="oe_inline"/>
+              <field name="size_uom" class="oe_inline" placeholder="Unit of Measure"/>
+            </div>
+            <label for="length"/>
+            <div>
+              <field name="length" class="oe_inline"/>
+              <field name="length_uom" class="oe_inline" placeholder="Unit of Measure"/>
+            </div>
+            <label for="width"/>
+            <div>
+              <field name="width" class="oe_inline"/>
+              <field name="width_uom" class="oe_inline" placeholder="Unit of Measure"/>
+            </div>
+            <label for="height"/>
+            <div>
+              <field name="height" class="oe_inline"/>
+              <field name="height_uom" class="oe_inline" placeholder="Unit of Measure"/>
+            </div>
+            <label for="thickness"/>
+            <div>
+              <field name="thickness" class="oe_inline"/>
+              <field name="thickness_uom" class="oe_inline" placeholder="Unit of Measure"/>
+            </div>
+          </group>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Product Template Tree Inherit -->
+    <record id="product_attributes_product_template_tree_inherit" model="ir.ui.view">
+      <field name="name">product.attributes.product.template.inherit.tree</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_tree_view" />
+      <field name="arch" type="xml">
+        <field name="name" position="after">
+          <field name="product_item_type_id"/>
+          <field name="product_generic_id"/>
+        </field>
+      </field>
+    </record>
+
+    <!-- Product Product Tree Inherit -->
+    <record id="product_attributes_product_product_tree_inherit" model="ir.ui.view">
+      <field name="name">product.attributes.product.product.inherit.tree</field>
+      <field name="model">product.product</field>
+      <field name="inherit_id" ref="product.product_product_tree_view" />
+      <field name="arch" type="xml">
+        <field name="name" position="after">
+          <field name="product_item_type_id"/>
+          <field name="product_generic_id"/>
+        </field>
+      </field>
+    </record>
+
+  </data>
+</odoo>

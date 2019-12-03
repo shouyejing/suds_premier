@@ -1,0 +1,113 @@
+<odoo>
+    <!-- Inherit Form view -->
+    <record id="invoice_form_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Removes Validate Button if user not in Groups L2 -->
+            <xpath expr="//button[@name='action_invoice_open']" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+
+            <!-- Removes Send by Email Button if user not in Groups L2 -->
+            <xpath expr="//button[@name='action_invoice_sent'][1]" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+
+            <!-- Removes Send by Email Button if user not in Groups L2 -->
+            <xpath expr="//button[@name='action_invoice_sent'][1]" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+
+            <!-- Removes Print Invoice if user not in Groups L2 -->
+            <xpath expr="//button[@name='invoice_print'][1]" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+
+            <!-- Removes Register Payment if user not in Groups L2 -->
+            <xpath expr="//button[5]" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+
+            <!-- Removes Add Credit Note if user not in Groups L2 -->
+            <xpath expr="//button[7]" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Inherit invoice_supplier_form -->
+
+    <record id="account_invoice_supplier_form_inherited" model="ir.ui.view">
+        <field name="name">account.invoice.supplier.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <!-- remove Validate if user not in L2 -->
+            <xpath expr="//button[@name='action_invoice_open']" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+
+            <!-- remove Register Payment if user not in L2 -->
+            <xpath expr="//header/button[2]" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+
+            <!-- remove 'Ask for a Credit Note' if user not in L2 -->
+            <xpath expr="//header/button[3]" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit account.view_move_form -->
+    <record id="account_view_move_form_inherited" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <!-- Removes Reverse Entry if user not in Groups L2 -->
+            <xpath expr="//button[2]" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+
+            <!-- Removes Duplicate Button if user not in Groups L2 -->
+            <xpath expr="//button[@name='action_duplicate']" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_account_payment_invoice_form_inherited" model="ir.ui.view">
+        <field name="name">account.payment.invoice.form.inherited</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_invoice_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_validate_invoice_payment']" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_account_payment_form_inherited" model="ir.ui.view">
+        <field name="name">account.payment.form.inherited</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <!-- Restrict Payment Matching Screen for Group L2 only -->
+            <xpath expr="//button[@name='open_payment_matching_screen']" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+            <xpath expr="//button[@name='post']" position="attributes">
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

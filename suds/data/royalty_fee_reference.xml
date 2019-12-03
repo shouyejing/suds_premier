@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+    <record id="min_0_max_200" model="royalty.fee.reference">
+		<field name="min_monthly_gross_sales">0</field>
+        <field name="max_monthly_gross_sales">200000</field>
+        <field name="royalty_fee">0.03</field>
+	  </record>
+
+    <record id="min_201000_max_250000" model="royalty.fee.reference">
+		    <field name="min_monthly_gross_sales">201000</field>
+        <field name="max_monthly_gross_sales">250000</field>
+        <field name="royalty_fee">0.04</field>
+	  </record>
+
+    <record id="min_251000_max_300000" model="royalty.fee.reference">
+		    <field name="min_monthly_gross_sales">251000</field>
+        <field name="max_monthly_gross_sales">300000</field>
+        <field name="royalty_fee">0.05</field>
+	  </record>
+
+    <record id="min_301000" model="royalty.fee.reference">
+		    <field name="min_monthly_gross_sales">301000</field>
+        <field name="royalty_fee">0.04</field>
+	  </record>
+  </data>
+</odoo>

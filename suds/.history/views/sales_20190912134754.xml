@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form view -->
+        <record id="sales_analytic_account_view_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <button name="action_confirm" position="before">
+                    <button name="%(action_create_project_from_sales)d" class="btn-primary" attrs="{'invisible': [('is_associated_with_project', '=', False)]}" type="action" string="Create Project" states="sale"/>
+                </button>
+                <field name="analytic_account_id" position="replace"/>
+                <field name="partner_id" position="after">
+                    <field name="analytic_account_id" domain="[('company_id', '=', company_id)]"/>
+                    <field name='branch_id' attrs="{'invisible': [('company_name', 'in', ['SUDS Premiere','Aquion'])]}"/>
+                    <field name='company_name' invisible="1"/>
+                </field>
+                <field name="payment_term_id" position="after">
+                    <field name="is_associated_with_project"/>
+                    <field name="project_id" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Inherit Form view -->
+        <record id="sales_invoice_royalty_fee_view_form" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="payment_term_id" position="after">
+                    <field name="is_royalty_fee"/>
+                </field>
+
+                <field name="product_id" position="after">
+                    <field name="month" attrs="{'column_invisible': [('parent.is_royalty_fee', '=', False)]}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="sales_order_pivot_view_id" model="ir.ui.view">
+            <field name="name">sale.order.inherit.view.pivot</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sale_order_pivot"/>
+            <field name="arch" type="xml">
+                <field name="amount_total" position="after">
+                    <field name="order_line" type="measure"/>
+                </field>
+                
+            </field>
+        </record>
+
+        <!-- Inherit Form view -->
+        <!-- <record id="" model="ir.ui.view">
+            <field name="name">product.template.common.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="barcode" position="after">
+                    <field name="analytic_account_id" domain="[('company_id', '=', company_id)]"/>
+                    <field name='company_name' invisible="1"/>
+                </field>
+            </field>
+        </record> -->
+
+        
+
+    </data>
+</odoo>
+
+
