@@ -60,7 +60,7 @@
             </xpath>
             <!-- Cancel -->
             <xpath expr="//button[@name='action_cancel']" position="attributes">
-                <attribute name="groups">purchase.group_purchase_manager,suds.purchase_group_level_2</attribute>
+                <attribute name="groups">purchase.group_purchase_user,suds.purchase_group_level_1</attribute>
             </xpath>
             <!-- Reset to Draft -->
             <xpath expr="//button[@name='action_draft']" position="attributes">
@@ -97,7 +97,7 @@
             </xpath>
             <!-- Leader Approve -->
             <xpath expr="//button[@name='button_leader_approved']" position="attributes">
-                <attribute name="groups">base.group_user,suds.purchase_group_level_1</attribute>
+                <attribute name="groups">purchase.group_purchase_user,suds.purchase_group_level_1</attribute>
             </xpath>
             <!-- Manager Approve -->
             <xpath expr="//button[@name='button_manager_approved']" position="attributes">
