@@ -77,7 +77,7 @@
         <field name="implied_ids" eval="[(4, ref('inventory_group_level_1'))]"/>
     </record>
 
-    <record id="l1_l2_crud" model="ir.rule">
+    <!-- <record id="l1_l2_crud" model="ir.rule">
         <field name="name">L1 and L2 CRUD access</field>
         <field name="model_id" ref="itm_petty_cash.model_petty_cash"/>
         <field name="domain_force">[]</field>
@@ -86,6 +86,6 @@
         <field name="perm_write" eval="0"/>
         <field name="perm_create" eval="0"/>
         <field name="perm_unlink" eval="0"/>
-    </record>
+    </record> -->
 
 </odoo>
