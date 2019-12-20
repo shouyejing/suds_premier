@@ -36,7 +36,8 @@
         'data/months.xml',
         'data/royalty_fee_reference.xml',
         #'data/res_company.xml',
-        'data/project_stages.xml'
+        'data/project_stages.xml',
+        'report/purchase_reports_inherit.xml',
         
     ],
 	'installable': True,
