@@ -6,9 +6,45 @@
         <field name="model">petty.cash</field>
         <field name="inherit_id" ref="itm_petty_cash.view_petty_cash_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//button[@name='do_request']" position="attributes">
+                <attribute name="attrs">{'invisible':[('state', 'in', ['request','cash_dispatch','to_reconcile','reconcile','reject'] )]}</attribute>
+            </xpath>
+            <xpath expr="//button[@name='do_cash_dispatch']" position="attributes">
+                <attribute name="attrs">{'invisible': [('state', 'in', ['draft','cash_dispatch','to_reconcile','reconcile','reject'] )]}</attribute>
+            </xpath>
+            <xpath expr="//button[3]" position="attributes">
+                <attribute name="attrs">{'invisible' : [('state', 'in', ['reconcile','draft','cash_dispatch','request','reject'] )]}</attribute>
+            </xpath>
+            <xpath expr="//button[@name='do_to_reconcile']" position="attributes">
+                <attribute name="attrs">{'invisible' : [('state', 'in', ['to_reconcile','reconcile','draft','request','reject'] )]}</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='do_cash_dispatch']" position="after">
+                <button name="reject_request" type="object" string="Reject" attrs="{'invisible' : [('state', 'in', ['draft','cash_dispatch','to_reconcile','reconcile','reject'] )]}" class="oe_highlight" />
+            </xpath>
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="statusbar_visible">"draft,request,cash_dispatch,to_reconcile,reconcile,reject"</attribute>
+                <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
+            </xpath>
+            <xpath expr="//field[@name='requested_employee_id']" position="after">
+                <field name="requested_by_date"/>
+            </xpath>
             <xpath expr="//field[@name='petty_credit_account_id']" position="after">
-                <field name="reason"/>
+                <field name="reason" attrs="{'readonly' : [('state', 'in', ['cash_dispatch','to_reconcile','reconcile','reject'])]}"/>
+            </xpath>
+            <xpath expr="//field[@name='petty_cash_line_ids']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state','in', ['draft','request','reconcile','to_reconcile','reject'])]}</attribute>
             </xpath>
         </field>
     </record>
+
+
+    <!-- petty cash request action  -->
+		<!-- <record model="ir.actions.act_window" id="action_petty_cash_request">
+			<field name="name">Petty Cash Request</field>
+			<field name="res_model">petty.cash</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,search</field>
+			<field name="context">{'search_default_employee_id':uid}</field>
+			<field name="domain">[('state', 'in', ['draft','request','reject'])]</field>
+		</record> -->
 </odoo>
