@@ -9,7 +9,7 @@
     'sequence': 1,
     'version': '1.0',
     'depends': [
-        'base', 'project', 'analytic', 'ks_dashboard_ninja', 'purchase', 'purchase_request', 'sale', 'purchase_requisition', 'website_quote', 'account', 'account_accountant', 'itm_petty_cash'
+        'base', 'project', 'analytic', 'ks_dashboard_ninja', 'purchase', 'purchase_request', 'sale', 'purchase_requisition', 'website_quote', 'account', 'account_accountant',
         ],
     'data': [
         'security/ir.model.access.csv',
