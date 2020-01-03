@@ -27,6 +27,7 @@
         'views/res_user.xml',
         'views/petty_cash_view_inherit.xml',
         'views/quote_template.xml',
+        'views/account_views_inherit.xml',
         'report/sales_qoutation.xml',
         'report/sales_invoice_without_payment.xml',
         'report/picking_operations.xml',
