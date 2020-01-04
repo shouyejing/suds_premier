@@ -10,7 +10,8 @@
                 <xpath expr="//group" position="after">
 
                     <group>
-                        <group string="Cheque Details">
+                        <group string="Cheque Details" attrs="{ 'invisible': [('journal_type','not in',('bank'))]}">
+                            <field name="journal_type" invisible="1"/>
                             <field name="cheque_ref" attrs="{'readonly': [('state','not in',('draft'))]}"/>
                             <field name="cheque_date" attrs="{'readonly': [('state','not in',('draft'))], 'required': [('cheque_ref','!=', False)]}"/>
                             <field name="bank_ref_id" domain="[('partner_id', '=', partner_id)]" attrs="{'readonly': [('state','not in',('draft'))], 'required': [('cheque_ref','!=', False)]}" />
@@ -37,6 +38,7 @@
 
                     <group>
                         <group string="Cheque Details">
+                            <field name="journal_type" invisible="1"/>
                             <field name="cheque_ref"/>
                             <field name="cheque_date"/>
                             <field name="bank_ref_id"/>
