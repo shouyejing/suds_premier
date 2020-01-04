@@ -20,6 +20,7 @@ class PettyCash(models.Model):
     requested_by_date = fields.Datetime(string="Requested By Date", default=_get_date_time,
                                         readonly=True
                                         )
+    lines_paid = fields.Boolean(string="All Lines Paid",compute='_lines_paid')
 
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -29,6 +30,17 @@ class PettyCash(models.Model):
         ('reconcile', 'Reconciled'),
         ('reject', 'Rejected'),
     ], string='Status', readonly=True, default='draft')
+
+    @api.depends('petty_cash_line_ids.state')
+    def _lines_paid(self):
+        paid_lines = []
+        for rec in self:
+            petty_cash_line = rec.petty_cash_line_ids
+            for i in petty_cash_line:
+                paid_lines.append(str(i.state))
+        if ('draft' not in paid_lines):
+            self.lines_paid = True
+
 
     @api.multi
     def reject_request(self):
