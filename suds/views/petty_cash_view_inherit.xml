@@ -34,17 +34,9 @@
             <xpath expr="//field[@name='petty_cash_line_ids']" position="attributes">
                 <attribute name="attrs">{'readonly': [('state','in', ['draft','request','reconcile','to_reconcile','reject'])]}</attribute>
             </xpath>
+            <xpath expr="//field[@name='amount']" position="attributes">
+                <attribute name="sum">Total</attribute>
+            </xpath>
         </field>
     </record>
-
-
-    <!-- petty cash request action  -->
-		<!-- <record model="ir.actions.act_window" id="action_petty_cash_request">
-			<field name="name">Petty Cash Request</field>
-			<field name="res_model">petty.cash</field>
-			<field name="view_type">form</field>
-			<field name="view_mode">tree,form,search</field>
-			<field name="context">{'search_default_employee_id':uid}</field>
-			<field name="domain">[('state', 'in', ['draft','request','reject'])]</field>
-		</record> -->
 </odoo>
