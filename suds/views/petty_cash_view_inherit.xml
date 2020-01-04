@@ -9,14 +9,14 @@
             <xpath expr="//button[@name='do_request']" position="attributes">
                 <attribute name="attrs">{'invisible':[('state', 'in', ['request','cash_dispatch','to_reconcile','reconcile','reject'] )]}</attribute>
             </xpath>
+            <xpath expr="//button[@name='do_to_reconcile']" position="replace">
+                <button name="do_to_reconcile" type="object" string="Request To Reconcile" attrs="{'invisible' : ['|',('state', 'in', ['to_reconcile','reconcile','draft','request','reject'] ),('lines_paid','=',False)]}" class="oe_highlight"/>
+            </xpath>
             <xpath expr="//button[@name='do_cash_dispatch']" position="attributes">
                 <attribute name="attrs">{'invisible': [('state', 'in', ['draft','cash_dispatch','to_reconcile','reconcile','reject'] )]}</attribute>
             </xpath>
             <xpath expr="//button[3]" position="attributes">
                 <attribute name="attrs">{'invisible' : [('state', 'in', ['reconcile','draft','cash_dispatch','request','reject'] )]}</attribute>
-            </xpath>
-            <xpath expr="//button[@name='do_to_reconcile']" position="attributes">
-                <attribute name="attrs">{'invisible' : [('state', 'in', ['to_reconcile','reconcile','draft','request','reject'] )]}</attribute>
             </xpath>
             <xpath expr="//header/button[@name='do_cash_dispatch']" position="after">
                 <button name="reject_request" type="object" string="Reject" attrs="{'invisible' : [('state', 'in', ['draft','cash_dispatch','to_reconcile','reconcile','reject'] )]}" class="oe_highlight" />
@@ -30,6 +30,7 @@
             </xpath>
             <xpath expr="//field[@name='petty_credit_account_id']" position="after">
                 <field name="reason" attrs="{'readonly' : [('state', 'in', ['cash_dispatch','to_reconcile','reconcile','reject'])]}"/>
+                <field name="lines_paid" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='petty_cash_line_ids']" position="attributes">
                 <attribute name="attrs">{'readonly': [('state','in', ['draft','request','reconcile','to_reconcile','reject'])]}</attribute>
