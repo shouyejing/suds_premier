@@ -9,7 +9,7 @@
     'sequence': 1,
     'version': '1.0',
     'depends': [
-        'base', 'project', 'analytic', 'ks_dashboard_ninja', 'purchase', 'purchase_request', 'sale', 'purchase_requisition', 'website_quote', 'account', 'account_accountant', 'itm_petty_cash'
+        'base', 'project', 'analytic', 'ks_dashboard_ninja', 'purchase', 'purchase_request', 'sale', 'purchase_requisition', 'website_quote', 'account', 'account_accountant',
         ],
     'data': [
         'security/ir.model.access.csv',
@@ -27,6 +27,7 @@
         'views/res_user.xml',
         'views/petty_cash_view_inherit.xml',
         'views/quote_template.xml',
+        'views/account_views_inherit.xml',
         'report/sales_qoutation.xml',
         'report/sales_invoice_without_payment.xml',
         'report/picking_operations.xml',
