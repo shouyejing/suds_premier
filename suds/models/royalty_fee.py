@@ -38,7 +38,7 @@ class MonthlyRoyaltyFeeLines(models.Model):
     subtotal = fields.Float(
         string="Subtotal", compute="compute_subtotal", store=True)
 
-    @api.onchange('tax_type','customer_id.tax_type','customer_id','other_additions', 'total_revenue', 'other_deductions')
+    @api.onchange('tax_type','customer_id','other_additions', 'total_revenue', 'other_deductions')
     def compute_sales_tax(self):
         for rec in self:
             if rec.customer_id.tax_type == 'registered':
