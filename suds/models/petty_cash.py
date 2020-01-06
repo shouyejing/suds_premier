@@ -12,6 +12,9 @@ _logger = logging.getLogger("_name_")
 class PettyCash(models.Model):
     _inherit = ['petty.cash']
 
+    account_expense_id = fields.Many2one('account.account', string='Account Expense',
+                                         domain="[('user_type_id','in',['Expenses','Cost of Revenue'])]", required=True)
+
     @api.multi
     def _get_date_time(self):
         return date.now()
@@ -63,13 +66,14 @@ class PettyCashLine(models.Model):
             for rec in line.cash_id:
                 petty_cash_line = rec.petty_cash_line_ids
                 for record in petty_cash_line:
-                    _logger.info('\n\n\n line state: {}'.format(str(record.state)))
+                    _logger.info(
+                        '\n\n\n line state: {}'.format(str(record.state)))
                     if record.state == 'draft':
                         total += record.amount
             petty_balance = line.cash_id.petty_cash_balance + total
             round(petty_balance)
             _logger.info('\n\n\namount_received: {}\ntotal cash: {}\npetty cash balance: {}\n\n\n'.format(
-                str(amount_received),str(total), str(petty_balance)))
+                str(amount_received), str(total), str(petty_balance)))
 
             if line.cash_id.paid_amount_total > line.cash_id.amount_received:
                 raise UserError(
