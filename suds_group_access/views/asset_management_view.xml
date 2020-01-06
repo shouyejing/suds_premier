@@ -37,7 +37,7 @@
           <xpath expr="//button[@name='modify']" position="attributes">
             <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
           </xpath>
-          <xpath expr="//button[@class='btn-default']" position="attributes">
+          <xpath expr="//button[hasclass('btn-default')]" position="attributes">
             <attribute name="groups">account.group_account_manager,suds.accounting_group_level_2</attribute>
           </xpath>
       </field>

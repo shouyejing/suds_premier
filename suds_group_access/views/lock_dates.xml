@@ -8,7 +8,7 @@
             <xpath expr="//button[@name='change_lock_date']" position="attributes">
                 <attribute name="groups">suds.accounting_group_level_2</attribute>
             </xpath>
-            <xpath expr="//button[@class='btn-default']" position="attributes">
+            <xpath expr="//button[hasclass('btn-default')]" position="attributes">
                 <attribute name="groups">suds.accounting_group_level_2</attribute>
             </xpath>            
         </field>
