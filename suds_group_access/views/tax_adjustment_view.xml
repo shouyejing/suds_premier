@@ -8,13 +8,13 @@
             <xpath expr="//div[1]/button[@name='create_move_debit']" position="attributes">
                 <attribute name="groups">suds.accounting_group_level_2</attribute>
             </xpath>
-            <xpath expr="//div[1]/button[hasclass('btn','btn-default']" position="attributes">
+            <xpath expr="//div[1]/button[hasclass('btn','btn-default')]" position="attributes">
                 <attribute name="groups">suds.accounting_group_level_2</attribute>
             </xpath>
             <xpath expr="//div[2]/button[@name='create_move_credit']" position="attributes">
                 <attribute name="groups">suds.accounting_group_level_2</attribute>
             </xpath>
-            <xpath expr="//div[2]/button[hasclass('btn','btn-default']" position="attributes">
+            <xpath expr="//div[2]/button[hasclass('btn','btn-default')]" position="attributes">
                 <attribute name="groups">suds.accounting_group_level_2</attribute>
             </xpath>
         </field>
