@@ -12,9 +12,6 @@ _logger = logging.getLogger("_name_")
 class PettyCash(models.Model):
     _inherit = ['petty.cash']
 
-    account_expense_id = fields.Many2one('account.account', string='Account Expense',
-                                         domain="[('user_type_id','in',['Expenses','Cost of Revenue'])]", required=True)
-
     @api.multi
     def _get_date_time(self):
         return date.now()
@@ -55,6 +52,9 @@ class PettyCash(models.Model):
 
 class PettyCashLine(models.Model):
     _inherit = 'petty.cash.line'
+
+    account_expense_id = fields.Many2one('account.account', string='Account Expense',
+                                         domain="[('user_type_id','in',['Expenses','Cost of Revenue'])]", required=True)
 
     @api.multi
     def do_pay(self):
