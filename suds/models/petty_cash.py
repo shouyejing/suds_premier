@@ -20,7 +20,7 @@ class PettyCash(models.Model):
     requested_by_date = fields.Datetime(string="Requested By Date", default=_get_date_time,
                                         readonly=True
                                         )
-    lines_paid = fields.Boolean(string="All Lines Paid",compute='_lines_paid')
+    lines_paid = fields.Boolean(string="All Lines Paid", compute='_lines_paid')
 
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -41,7 +41,6 @@ class PettyCash(models.Model):
         if ('draft' not in paid_lines):
             self.lines_paid = True
 
-
     @api.multi
     def reject_request(self):
         self.write({
@@ -57,18 +56,27 @@ class PettyCashLine(models.Model):
     @api.multi
     def do_pay(self):
         res = super(PettyCashLine, self).do_pay()
+        total = 0.0
         for line in self:
-            cash = line.amount if line.state == 'draft' else 0
-            petty_balance = line.cash_id.petty_cash_balance + cash
+            line.state = 'draft'
+            amount_received = line.cash_id.amount_received
+            for rec in line.cash_id:
+                petty_cash_line = rec.petty_cash_line_ids
+                for record in petty_cash_line:
+                    _logger.info('\n\n\n line state: {}'.format(str(record.state)))
+                    if record.state == 'draft':
+                        total += record.amount
+            petty_balance = line.cash_id.petty_cash_balance + total
             round(petty_balance)
-            _logger.info('\n\n\ntotal cash: {}\npetty cash balance: {}\n\n\n'.format(
-                str(cash), str(petty_balance)))
+            _logger.info('\n\n\namount_received: {}\ntotal cash: {}\npetty cash balance: {}\n\n\n'.format(
+                str(amount_received),str(total), str(petty_balance)))
 
             if line.cash_id.paid_amount_total > line.cash_id.amount_received:
                 raise UserError(
                     _('You Can Not Pay More Then  Received Amount !'))
-            elif cash > petty_balance:
+            elif line.amount > petty_balance:
                 raise UserError(
                     _('You Can Not Pay More Than The Petty Cash Balance !'))
             else:
+                line.state = 'paid'
                 return res
