@@ -55,7 +55,7 @@ class PettyCashLine(models.Model):
 
     account_expense_id = fields.Many2one(
         'account.account', string='Account Expense',
-        # domain="[('user_type_id','in',['Expenses','Cost of Revenue'])]",
+        domain="[]",
         required=True
     )
 
