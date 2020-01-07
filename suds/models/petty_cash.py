@@ -53,8 +53,12 @@ class PettyCash(models.Model):
 class PettyCashLine(models.Model):
     _inherit = 'petty.cash.line'
 
-    account_expense_id = fields.Many2one('account.account', string='Account Expense',
-                                         domain="[('user_type_id','in',['Expenses','Cost of Revenue'])]", required=True)
+    account_expense_id = fields.Many2one(
+        'account.account',
+        string='Account Expense',
+        domain="[]",
+        required=True
+    )
 
     @api.multi
     def do_pay(self):
