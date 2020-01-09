@@ -14,7 +14,9 @@
                             <field name="journal_type" invisible="1"/>
                             <field name="cheque_ref" attrs="{'readonly': [('state','not in',('draft'))]}"/>
                             <field name="cheque_date" attrs="{'readonly': [('state','not in',('draft'))], 'required': [('cheque_ref','!=', False)]}"/>
-                            <field name="bank_ref_id" domain="[('partner_id', '=', partner_id)]" attrs="{'readonly': [('state','not in',('draft'))], 'required': [('cheque_ref','!=', False)]}" />
+                            <field name="bank_ref_id" domain="[('partner_id', '=', partner_id)]" attrs="{'readonly': [('state','not in',('draft'))], 'required': [('payment_type','in',['inbound'])('cheque_ref','!=', False)], 'invisible':[('payment_type','in',['transfer'])]}" />
+                           <!-- bank_id commented out as it doesn't serve a purpose yet. will uncomment later-->
+                            <!-- <field name="bank_id" attrs="{'invisible': [('payment_type','not in',['transfer'])],'readonly': [('state','not in',('draft'))]}"/> -->
                             <field name="cheque_date_rcv" attrs="{'readonly': [('state','not in',('draft'))]}"/>
                             <field name="cheque_date_cleared" attrs="{'readonly': [('state','not in',('draft'))]}"/>
                         </group>
@@ -42,6 +44,8 @@
                             <field name="cheque_ref"/>
                             <field name="cheque_date"/>
                             <field name="bank_ref_id"/>
+                            <!-- bank_id commented out as it doesn't serve a purpose yet. will uncomment later-->
+                            <!-- <field name="bank_id"/> -->
                             <field name="cheque_date_rcv"/>
                             <field name="cheque_date_cleared"/>
                         </group>
@@ -51,6 +55,19 @@
                             <field name="official_receipt_no"/>
                         </group>
                     </group>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- Adds Check Number in the Tree View -->
+        <record id="view_account_payment_tree_inherit" model="ir.ui.view">
+            <field name="name">suds.account.payment.tree</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_date']" position="after">
+                    <field name="cheque_ref" string="Check No"/>
                 </xpath>
             </field>
         </record>
