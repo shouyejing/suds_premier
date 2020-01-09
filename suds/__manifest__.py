@@ -39,6 +39,8 @@
         #'data/res_company.xml',
         'data/project_stages.xml',
         'report/purchase_reports_inherit.xml',
+        'report/sale_reports_inherit.xml',
+        'report/report_deliveryslip.xml',
         
     ],
 	'installable': True,
