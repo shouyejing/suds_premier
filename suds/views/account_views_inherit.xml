@@ -71,5 +71,17 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="view_account_supplier_payment_tree_inherit" model="ir.ui.view">
+            <field name="name">suds.account.supplier.payment.tree</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_supplier_payment_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_date']" position="after">
+                    <field name="cheque_ref" string="Check No"/>
+                </xpath>
+            </field>
+        </record>
+
     </data>
 </odoo>
