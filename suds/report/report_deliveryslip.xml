@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Inherited Web External Layout which calls the templates corresponding to chosen Document Template -->
+        <template id="suds_web_external_layout_inherit" inherit_id="web.external_layout">
+
+            <!-- Document Templates 
+                1. Background
+                2. Boxed
+                3. Clean
+                4. Standard 
+            -->
+            <xpath expr="//t[@t-call='web.external_layout_background']" position="attributes">
+                <attribute name="t-call">suds.suds_external_layout_background</attribute>
+            </xpath>
+
+            <xpath expr="//t[@t-call='web.external_layout_boxed']" position="attributes">
+                <attribute name="t-call">suds.suds_external_layout_boxed</attribute>
+            </xpath>
+
+            <xpath expr="//t[@t-call='web.external_layout_clean']" position="attributes">
+                <attribute name="t-call">suds.suds_external_layout_clean</attribute>
+            </xpath>
+
+            <xpath expr="//t[@t-call='web.external_layout_standard']" position="attributes">
+                <attribute name="t-call">suds.suds_external_layout_standard</attribute>
+            </xpath>
+
+        </template>
+
+        <!-- Background -->
+        <template id="suds_external_layout_background" inherit_id="web.external_layout_background">
+            <xpath expr="//span" position="replace">
+                <span t-field="company.partner_id" t-field-options='{"widget": "contact", "fields": ["address","name","phone","email"], "no_marker": true}'/>
+            </xpath>
+        </template>
+
+        <!-- Boxed -->
+        <template id="suds_external_layout_boxed" inherit_id="web.external_layout_boxed">
+            <xpath expr="//div[@name='company_address']/span" position="replace">
+                <span class="company_address" t-field="company.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name","phone","email"], "no_marker": true}'/>
+            </xpath>
+
+
+        </template>
+
+        <!-- Clean -->
+        <template id="suds_external_layout_clean" inherit_id="web.external_layout_clean">
+
+
+        </template>
+
+        <!-- Standard -->
+        <template id="suds_external_layout_standard" inherit_id="web.external_layout_standard">
+            <xpath expr="//div[hasclass('col-xs-6')]/span" position="replace">
+                <span t-field="company.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name","phone","email"], "no_marker": true}' style="border-bottom: 1px solid black; display:inline-block;"/>
+            </xpath>
+
+        </template>
+
+        <!-- Adding "Delivery Slip" "Remarks" "Delivery and Received Fill outs"  -->
+        <template id="suds_report_deliveryslip_inherit" inherit_id="stock.report_delivery_document">
+            <xpath expr="//t[@t-call='web.html_container']/t" position="attributes">
+                <attribute name="t-call">suds.suds_web_external_layout_inherit</attribute>
+            </xpath>
+
+            <xpath expr="//h2" position="before">
+                <h2>Delivery Slip</h2>
+            </xpath>
+
+            <xpath expr="//table[hasclass('table', 'table-condensed', 'mt48')]/thead/tr/th[last()]" position="after">
+                <th>
+                    <strong>Remarks</strong>
+                </th>
+            </xpath>
+
+            <xpath expr="//table[hasclass('table','table-condensed','mt48')]/tbody/tr/td[last()]" position="after">
+                <td></td>
+            </xpath>
+
+            <xpath expr="//table[hasclass('table', 'table-condensed', 'mt48')]" position="after">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4">
+                            <span>Received the above items in good order and condition.</span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-6">
+                           <p>Delivered By: ________________</p> 
+                           <span>Date:</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>Received By:________________</p> 
+                           <span>Date:</span>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+
+        </template>
+
+    </data>
+
+</odoo>
