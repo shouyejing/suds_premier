@@ -133,9 +133,8 @@ class CurrentBusiness(models.Model):
     business_name = fields.Char(string="Business Name")
     business_type = fields.Char(string="Business Type")
 
-class CurrentBusiness(models.Model):
+class ServiceRelated(models.Model):
     _name='service.related'
-
     project_id = fields.Many2one('project.project')
     service_related_work = fields.Char(string="Service Related Work")
     description = fields.Char(string="Description")
