@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<odoo>
+    <template id="report_saleorder_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//table[hasclass('table','table-condensed')]/thead/tr/th[last()]" position="after">
+            <th>Remarks</th>
+        </xpath>
+        <xpath expr="//tbody[hasclass('sale_tbody')]/t/t[2]/tr/td[last()]" position="after">
+            <td>
+                <span> </span>
+            </td>
+        </xpath>
+    </template>
+</odoo>
+    
