@@ -30,6 +30,9 @@ class AccountPayment(models.Model):
     cheque_ref = fields.Char(string="Cheque Reference")
     cheque_date = fields.Date(string="Cheque Date")
     bank_ref_id = fields.Many2one('res.partner.bank', string="Bank Reference")
+    bank_id = fields.Many2one('account.journal',
+                              string="Bank Reference",
+                              domain=[('type', 'in', ['bank'])])
     cheque_date_rcv = fields.Date(string="Cheque Date Received")
     cheque_date_cleared = fields.Date(string="Cheque Date Cleared")
 
