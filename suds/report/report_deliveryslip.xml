@@ -43,14 +43,16 @@
                         t-field-options='{"widget": "contact", "fields": ["address", "name","phone","email"], "no_marker": true}'/>
             </xpath>
 
-            
+
         </template>
 
+        <!-- Clean -->
         <template id="suds_external_layout_clean" inherit_id="web.external_layout_clean">
 
 
         </template>
 
+        <!-- Standard -->
         <template id="suds_external_layout_standard" inherit_id="web.external_layout_standard">
             <xpath expr="//div[hasclass('col-xs-6')]/span" position="replace">
                 <span t-field="company.partner_id"
@@ -60,6 +62,7 @@
 
         </template>
 
+        <!-- Adding "Delivery Slip" "Remarks" "Delivery and Received Fill outs"  -->
         <template id="suds_report_deliveryslip_inherit" inherit_id="stock.report_delivery_document">
             <xpath expr="//t[@t-call='web.html_container']/t" position="attributes">
                 <attribute name="t-call">suds.suds_web_external_layout_inherit</attribute>
@@ -77,7 +80,28 @@
                 <td> </td>
             </xpath>
             
-            
+            <xpath expr="//table[hasclass('table', 'table-condensed', 'mt48')]" position="after">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4">
+                            <span>Received the above items in good order and condition.</span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-6">
+                           <p>Delivered By: ________________</p> 
+                           <span>Date:</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>Received By:________________</p> 
+                           <span>Date:</span>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
         </template>
 
     </data>
