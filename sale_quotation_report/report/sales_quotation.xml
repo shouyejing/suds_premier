@@ -136,26 +136,6 @@
                         </t>
                     </tbody>
                 </table>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-4"></div>
-                        <div class="col-xs-4"></div>
-                        <div class="col-xs-4">
-                            <span>Received the above items in good order and condition.</span>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-xs-6">
-                           <p>Delivered By: ________________</p> 
-                           <span>Date:</span>
-                        </div>
-                        <div class="col-xs-6">
-                            <p>Received By:________________</p> 
-                           <span>Date:</span>
-                        </div>
-                    </div>
-                </div>
 
                 <t t-if="page_index &lt; page_size - 1" groups="sale.group_sale_layout">
                     <p style="page-break-before:always;"> </p>
@@ -209,11 +189,39 @@
             </div>
 
             
+            <!-- <div class="container">
+                <div class="row">
+                    <div class="col-xs-6"></div>
+                    <div class="col-xs-6">
+                        <span>Received the above items in good order and condition.</span>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p>Delivered By: ________________</p> 
+                        <span>Date:</span>
+                    </div>
+                    <div class="col-xs-6">
+                        <p>Received By:________________</p> 
+                        <span>Date:</span>
+                    </div>
+                </div>
+            </div> -->
+        
+            <p t-field="doc.note" />
+            <p t-if="doc.payment_term_id.note">
+                <span t-field="doc.payment_term_id.note"/>
+            </p>
+            <p id="fiscal_position_remark" t-if="doc.fiscal_position_id and doc.fiscal_position_id.note">
+                <strong>Fiscal Position Remark:</strong>
+                <span t-field="doc.fiscal_position_id.note"/>
+            </p>
+
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-4"></div>
-                    <div class="col-xs-4"></div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-6"></div>
+                    <div class="col-xs-6">
                         <span>Received the above items in good order and condition.</span>
                     </div>
                 </div>
@@ -229,15 +237,6 @@
                     </div>
                 </div>
             </div>
-        
-            <p t-field="doc.note" />
-            <p t-if="doc.payment_term_id.note">
-                <span t-field="doc.payment_term_id.note"/>
-            </p>
-            <p id="fiscal_position_remark" t-if="doc.fiscal_position_id and doc.fiscal_position_id.note">
-                <strong>Fiscal Position Remark:</strong>
-                <span t-field="doc.fiscal_position_id.note"/>
-            </p>
             <div class="oe_structure"/>
         </div>
     </t>
