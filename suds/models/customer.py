@@ -25,6 +25,7 @@ class FranchiseeProfile(models.Model):
     twitter_account = fields.Char(string="Twitter account")
     branch_id = fields.Many2one('branches.cost.center', string="Branch")
     business_name = fields.Char(string="Business Name")
-    company_name = fields.Char(related="parent_id.name")
+    franchisee_company_name = fields.Char(related="parent_id.name")
+    # company_name = fields.Char(related="parent_id.name")
     tax_type = fields.Selection(
         TAX_TYPE, string="Tax Type", default="non_vat",required=True)
