@@ -28,17 +28,28 @@ class SprogroupPurchaseRequest(models.Model):
     def _get_default_requested_by(self):
         return self.env['res.users'].browse(self.env.uid)
 
-    @api.model
-    def _get_default_name(self):
-        return self.env['ir.sequence'].next_by_code('sprogroup.purchase.request')
+    
+    
+
+    # @api.model
+    # def _get_default_name(self):
+    #     return self.env['ir.sequence'].next_by_code('sprogroup.purchase.request')
+
+    code = fields.Char(string="Code",
+                                 required=True,
+                                 copy=False,
+                                 readonly=True,
+                                 index=True,
+                                 default=lambda self: _('New'),
+                                 track_visibility='onchange')
 
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id)
     name = fields.Char('Request Name', size=32, required=True,
                        track_visibility='onchange')
 
-    code = fields.Char('Code', size=32, required=True,
-                       default=_get_default_name,
-                       track_visibility='onchange')
+    # code = fields.Char('Code', size=32, required=True,
+    #                    default=_get_default_name,
+    #                    track_visibility='onchange')
     date_start = fields.Date('Start date',
                              help="Date when the user initiated the request.",
                              default=fields.Date.context_today,
@@ -263,6 +274,14 @@ class SprogroupPurchaseRequest(models.Model):
 
             }
         }
+
+    @api.model
+    def create(self, vals):
+        if vals.get('code', _('New')) == ('New'):
+            vals['code'] = self.env['ir.sequence'].next_by_code(
+                'sprogroup.purchase.request') or _('New')
+        result = super(SprogroupPurchaseRequest, self).create(vals)
+        return result
 class SprogroupPurchaseRequestLine(models.Model):
 
     _name = "sprogroup.purchase.request.line"
