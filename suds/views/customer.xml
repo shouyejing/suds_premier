@@ -14,10 +14,10 @@
 
                 <div class="oe_title" position="inside">
                     <field name="branch_id" placeholder="Branch"/>
-                    <field name="franchisee_company_name" invisible="1"/>
+                    <field name="company_name" invisible="1"/>
                 </div>
                 <notebook position="before">
-                    <group attrs="{'invisible': [('franchisee_company_name', 'in', ['Suds Premier Franchising Corp','Aquion Industrial Laundries'])]}">
+                    <group attrs="{'invisible': [('company_name', 'in', ['Suds Premier Franchising Corp','Aquion Industrial Laundries'])]}">
                         <group string="For franchisee" name="franchisee_profile">
                             <field name="date_opened"/>
                             <field name="manager_name"/>
@@ -33,7 +33,7 @@
                     </group>
                     <!-- attrs="{'invisible': [('company_name', 'not ilike', 'SUDS Premiere')]}"-->
                     <group>
-                        <group string="Social Network Accounts" name="franchisee_social_accounts" attrs="{'invisible': [('franchisee_company_name', 'in', ['SUDS Premiere','Aquion'])]}">
+                        <group string="Social Network Accounts" name="franchisee_social_accounts" attrs="{'invisible': [('company_name', 'in', ['SUDS Premiere','Aquion'])]}">
                             <field name="fb_page"/>
                             <field name="instagram_account"/>
                             <field name="twitter_account"/>
