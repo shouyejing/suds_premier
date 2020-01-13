@@ -21,6 +21,7 @@
                     <field name="account_analytic_id" domain="[('company_id', '=', company_id)]"/>
                     <field name='branch_id' attrs="{'invisible': [('company_name', 'in', ['Suds Premier Franchising Corp','Aquion Industrial Laundries'])]}"/>
                     <field name='company_name' invisible="1"/>
+                    <field name="requested_by_id"/>
                 </field>
 
                 <field name="order_line" position="attributes">
@@ -54,6 +55,21 @@
                 </field>
             </field>
         </record>
+
+        <!-- Inherit Purchase Order Tree -->
+        <record id="purchase_order_tree_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.tree.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="after">
+                    <field name="requested_by_id"/>
+                   <field name="create_uid" string="Created By"/>
+                </field>
+            </field>
+        </record>
+
+        
 
     </data>
 </odoo>
