@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_check_voucher_suds" inherit_id="check_voucher_default.report_check_voucher_v2">
+            <xpath expr="//div[@name='signatories']" position="replace">
+                <div name="signatories" class="flex-container">
+                    <div>
+                        <table width="100%" align="left" class="table table-sm" style="font-size:12px;">
+                            <thead style="display:table-row-group; text-align:center;">
+                                <tr>
+                                    <th>Prepared By</th>
+                                    <th>Certified Correct By</th>
+                                    <th>Approved By</th>
+                                    <th>Received By</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td style="height:50px; white-space: nowrap;"></td>
+                                <td style="height:50px; white-space: nowrap;"></td>
+                                <td style="height:50px; white-space: nowrap;"></td>
+                                <td style="height:50px; white-space: nowrap;"></td>
+                            </tbody>
+                            <tfoot style="text-align:center; display: table-row-group;">
+                                <td style="white-space: nowrap;">
+                                    <t t-esc="docs.prepared_by_id.name"/>
+                                    <br/>
+                                    <!-- <t t-esc="context_timestamp(docs.create_date).strftime('%m-%d-%Y %I:%M %p')"/>  -->
+                                    <t t-esc="docs.create_date"/>
+
+
+                                </td>
+                                <td style="white-space: nowrap;">
+                                    <t t-if="docs.certified_correct_by_id.name != False">
+                                        <t t-esc="docs.certified_correct_by_id.name"/>
+                                        <br/>
+                                        <!-- <t t-esc="context_timestamp(docs.date_certified).strftime('%m-%d-%Y %I:%M %p')"/>  -->
+                                        <t t-esc="docs.date_certified"/>
+
+                                    </t>
+
+                                    <t t-else="">
+                                        <p></p>
+                                    </t>
+                                </td>
+                                <td style="white-space: nowrap;">
+                                    <t t-if="docs.approved_by_id.name != False">
+                                        <t t-esc="docs.approved_by_id.name"/>
+                                        <br/>
+                                        <!-- <t t-esc="context_timestamp(docs.date_approved).strftime('%m-%d-%Y %I:%M %p')"/>  -->
+                                        <t t-esc="docs.date_approved"/>
+
+                                    </t>
+                                    <t t-else="">
+                                        <p></p>
+                                    </t>
+                                </td>
+                                <td style="text-align:left; white-space: nowrap;">Name: </td>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+
+</odoo>
+
+
+

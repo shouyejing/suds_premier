@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="check_voucher_report" 
+        model="check.voucher" 
+        string="Check Voucher"
+        report_type="qweb-pdf"
+        name="cv_suds.report_check_voucher_suds" 
+        file="base.report_report_check_voucher_suds"        
+    />
+</odoo>
