@@ -26,7 +26,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/check_voucher_view.xml',
-        'views/account_views_inherit.xml',
+        # 'views/account_views_inherit.xml',
         'reports/report.xml',
         'reports/check_voucher.xml',
         # 'views/templates.xml',
