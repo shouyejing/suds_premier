@@ -54,7 +54,8 @@ class PettyCashLine(models.Model):
     _inherit = 'petty.cash.line'
 
     account_expense_id = fields.Many2one(
-        'account.account', string='Account Expense',
+        'account.account', 
+        string='Account Expense',
         domain="[]",
         required=True
     )
