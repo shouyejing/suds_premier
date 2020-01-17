@@ -20,18 +20,24 @@
                                 <td style="height:50px; white-space: nowrap;"></td>
                                 <td style="height:50px; white-space: nowrap;"></td>
                             </tbody>
-                            <tfoot style="text-align:center; display: table-row-group;">    
+                            <tfoot style="text-align:center; display: table-row-group;">
                                 <td style="white-space: nowrap;">
                                     <t t-esc="docs.prepared_by_id.name"/>
                                     <br/>
-                                    <t t-esc="context_timestamp(docs.create_date).strftime('%m-%d-%Y %I:%M %p')"/> 
+                                    <!-- <t t-esc="context_timestamp(docs.create_date).strftime('%m-%d-%Y %I:%M %p')"/>  -->
+                                    <t t-esc="docs.create_date"/>
+
+
                                 </td>
                                 <td style="white-space: nowrap;">
                                     <t t-if="docs.certified_correct_by_id.name != False">
                                         <t t-esc="docs.certified_correct_by_id.name"/>
                                         <br/>
-                                        <t t-esc="context_timestamp(docs.date_certified).strftime('%m-%d-%Y %I:%M %p')"/> 
+                                        <!-- <t t-esc="context_timestamp(docs.date_certified).strftime('%m-%d-%Y %I:%M %p')"/>  -->
+                                        <t t-esc="docs.date_certified"/>
+
                                     </t>
+
                                     <t t-else="">
                                         <p></p>
                                     </t>
@@ -40,7 +46,9 @@
                                     <t t-if="docs.approved_by_id.name != False">
                                         <t t-esc="docs.approved_by_id.name"/>
                                         <br/>
-                                        <t t-esc="context_timestamp(docs.date_approved).strftime('%m-%d-%Y %I:%M %p')"/> 
+                                        <!-- <t t-esc="context_timestamp(docs.date_approved).strftime('%m-%d-%Y %I:%M %p')"/>  -->
+                                        <t t-esc="docs.date_approved"/>
+
                                     </t>
                                     <t t-else="">
                                         <p></p>
