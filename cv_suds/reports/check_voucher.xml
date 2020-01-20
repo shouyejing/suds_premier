@@ -24,18 +24,13 @@
                                 <td style="white-space: nowrap;">
                                     <t t-esc="docs.prepared_by_id.name"/>
                                     <br/>
-                                    <!-- <t t-esc="context_timestamp(docs.create_date).strftime('%m-%d-%Y %I:%M %p')"/>  -->
-                                    <t t-esc="docs.create_date"/>
-
-
+                                    <t t-esc="context_timestamp(datetime.datetime.strptime(docs.create_date, '%Y-%m-%d %I:%M:%S')).strftime('%m-%d-%Y %I:%M %p')"/>
                                 </td>
                                 <td style="white-space: nowrap;">
                                     <t t-if="docs.certified_correct_by_id.name != False">
                                         <t t-esc="docs.certified_correct_by_id.name"/>
                                         <br/>
-                                        <!-- <t t-esc="context_timestamp(docs.date_certified).strftime('%m-%d-%Y %I:%M %p')"/>  -->
-                                        <t t-esc="docs.date_certified"/>
-
+                                        <t t-esc="context_timestamp(datetime.datetime.strptime(docs.date_certified, '%Y-%m-%d %I:%M:%S')).strftime('%m-%d-%Y %I:%M %p')"/>
                                     </t>
 
                                     <t t-else="">
@@ -46,9 +41,7 @@
                                     <t t-if="docs.approved_by_id.name != False">
                                         <t t-esc="docs.approved_by_id.name"/>
                                         <br/>
-                                        <!-- <t t-esc="context_timestamp(docs.date_approved).strftime('%m-%d-%Y %I:%M %p')"/>  -->
-                                        <t t-esc="docs.date_approved"/>
-
+                                        <t t-esc="context_timestamp(datetime.datetime.strptime(docs.date_approved, '%Y-%m-%d %I:%M:%S')).strftime('%m-%d-%Y %I:%M %p')"/>
                                     </t>
                                     <t t-else="">
                                         <p></p>
