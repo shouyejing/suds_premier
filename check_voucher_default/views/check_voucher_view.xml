@@ -51,8 +51,8 @@
                   string="Create Check Voucher" 
                   type="action" 
                   context="{'default_payment_id': active_id, 'default_partner_id': partner_id, 'default_bank_id': journal_id}" 
-                  attrs="{'invisible': ['|','|','|','|',('journal_type','not in',['bank']), ('check_voucher_id','!=',False), ('payment_type','in',['inbound']),
-                                             ('state','not in',['draft'])]}"/>
+                  attrs="{'invisible': ['|','|','|','|','|',('journal_type','not in',['bank']), ('check_voucher_id','!=',False), ('payment_type','in',['inbound']),
+                                             ('state','not in',['draft']), ('payment_method_id','!=',4)]}"/>
 
         </button>
         <field name="payment_transaction_id" position='after'>
