@@ -33,7 +33,7 @@
         'report/picking_operations.xml',
         'report/delivery_receipt.xml',
         'report/service_invoice.xml',
-        'report/invoice_multiple_so.xml',
+        #'report/invoice_multiple_so.xml',
         'data/months.xml',
         'data/royalty_fee_reference.xml',
         #'data/res_company.xml',
