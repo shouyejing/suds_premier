@@ -336,9 +336,12 @@ class AccountPayment(models.Model):
         string='Voucher State', related='check_voucher_id.state'
     )
 
+
+
+    """Modified Confirm Button in Account Payment"""
     @api.multi
     def post(self):        
-        if self.payment_type == 'outbound':
+        if self.payment_type == 'outbound' and self.journal_id.type == 'bank' and self.payment_method_id == 4:
             if self.check_voucher_id.id == False:
                 raise UserError(_('Check Voucher must be created for this record before confirming.'))
             elif self.voucher_state != 'approved':
