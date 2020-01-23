@@ -302,7 +302,7 @@ class Particulars(models.Model):
                              'currency_id',
                              )
 
-    @api.onchange('invoice_id')
+    @api.onchange('invoice_id','amount')
     def _on_change_amount(self):
         self.amount = self.invoice_id.residual if self.invoice_id.residual else self.amount
 
