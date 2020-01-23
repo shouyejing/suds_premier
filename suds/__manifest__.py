@@ -10,7 +10,7 @@
     'version': '1.0',
     'depends': [
         'base', 'project', 'analytic', 'ks_dashboard_ninja', 'purchase', 'purchase_request', 'sale', 'purchase_requisition', 'website_quote', 'account', 'account_accountant',
-        ],
+    ],
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',
@@ -28,6 +28,7 @@
         'views/petty_cash_view_inherit.xml',
         'views/quote_template.xml',
         'views/account_views_inherit.xml',
+        'views/stock_move_line_views.xml',
         'report/sales_qoutation.xml',
         'report/sales_invoice_without_payment.xml',
         'report/picking_operations.xml',
@@ -36,17 +37,14 @@
         # 'report/invoice_multiple_so.xml',
         'data/months.xml',
         'data/royalty_fee_reference.xml',
-        #'data/res_company.xml',
+        # 'data/res_company.xml',
         'data/project_stages.xml',
         'report/purchase_reports_inherit.xml',
         'report/sale_reports_inherit.xml',
         'report/report_deliveryslip.xml',
-        
+
     ],
-	'installable': True,
+    'installable': True,
     'application': False,
 
 }
-
-
-
