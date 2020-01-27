@@ -32,9 +32,12 @@
       <field name="arch" type="xml">
         <tree>
           <field name="partner_id"/>
+          <field name="check_no_id"/>
+          <field name="payment_id"/>
+          <field name="bank_id"/>
           <field name="voucher_id_seq"/>
+          <field name="state"/>
           <field name="date"/>
-
         </tree>
       </field>
     </record>
