@@ -52,6 +52,10 @@
                             <strong>Due Date:</strong>
                             <p t-field="o.date_due"/>
                         </div>
+                        <div class="col-xs-2" t-if="o.invoice_sales_document">
+                            <strong>Invoice Sales Document:</strong>
+                            <p t-field="o.invoice_sales_document"/>
+                        </div>
                         <div class="col-xs-2" t-if="o.partner_id.ref">
                             <strong>Customer Code:</strong>
                             <p t-field="o.partner_id.ref"/>
