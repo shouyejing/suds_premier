@@ -5,6 +5,9 @@
 from odoo import models, fields, api, _
 from datetime import datetime as date
 from odoo.exceptions import ValidationError, UserError, Warning
+import logging
+_logger = logging.getLogger("_name_")
+
 
 # set journal in employee 
 class HrEmployee(models.Model):
@@ -188,6 +191,7 @@ class PettyCash(models.Model):
                 'cash_id' : petty.id,
                 'payment_type' : 'transfer',
                 'payment_date' : petty.date_received,
+                'company_id' : self.requested_employee_id.company_id.id,
                 'internal_transfer_type':'journal_to_journal',
                 'journal_id':petty.journal_id.id,
                 'destination_journal_id' : petty.petty_journal_id.id,
@@ -291,6 +295,7 @@ class PettyCashLine(models.Model):
                 'payment_type' : 'transfer',
                 'payment_date' : line.date_maturity,
                 'internal_transfer_type':'journal_to_account',
+                'company_id' : line.cash_id.requested_employee_id.company_id.id,
                 'journal_id':line.cash_id.petty_journal_id.id,
                 'destination_account_from_id' : line.account_expense_id.id,
                 'payment_method_id': payment_method_id.id,
