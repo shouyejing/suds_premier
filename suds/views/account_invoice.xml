@@ -5,7 +5,7 @@
             <field name="name">suds.account.invoice.inherit</field>
             <field name="model">account.invoice</field>
             <field name="inherit_id" ref="account.invoice_supplier_form"/>
-            <field name="arch">
+            <field name="arch" type="xml">
                 <xpath expr="//field[@name='amount_untaxed']" position="attributes">
                     <attribute name="force_save">1</attribute>
                 </xpath>
