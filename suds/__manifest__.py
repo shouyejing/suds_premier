@@ -29,6 +29,7 @@
         'views/quote_template.xml',
         'views/account_views_inherit.xml',
         'views/stock_move_line_views.xml',
+        'views/account_invoice.xml',
         'report/sales_qoutation.xml',
         'report/sales_invoice_without_payment.xml',
         'report/picking_operations.xml',
