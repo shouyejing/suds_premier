@@ -185,6 +185,7 @@ class PettyCash(models.Model):
     def do_cash_dispatch(self):
         for petty in self:
             petty.state = 'cash_dispatch'
+            _logger.info("\n\n\njournal_id {}".format(petty.journal_id))
             payment_methods = petty.journal_id.inbound_payment_method_ids or petty.journal_id.outbound_payment_method_ids
             payment_method_id = payment_methods and payment_methods[0] or False
             payment_id = self.env['account.payment'].create({
