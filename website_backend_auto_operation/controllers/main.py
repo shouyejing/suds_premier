@@ -4,7 +4,9 @@
 from odoo import SUPERUSER_ID, http, tools, _
 from odoo.http import request
 from datetime import datetime
+import logging
 from odoo.addons.website_sale.controllers.main import WebsiteSale
+_logger = logging.getLogger("_name_")
 
 
 class OdooWebsiteSale(WebsiteSale):
@@ -23,11 +25,13 @@ class OdooWebsiteSale(WebsiteSale):
         
         if transaction_id is None:
             tx = request.website.sale_get_transaction()
+            _logger.info('\n\n\nTX{}\n\n\n'.format(tx))
         else:
             tx = request.env['payment.transaction'].browse(transaction_id)
-
+            _logger.info('\n\n\nTX{}\n\n\n'.format(tx))
         if sale_order_id is None:
             order = request.website.sale_get_order()
+            _logger.info('\n\n\nOrder{}\n\n\n'.format(order))
         else:
             order = request.env['sale.order'].sudo().browse(sale_order_id)
             assert order.id == request.session.get('sale_last_order_id')

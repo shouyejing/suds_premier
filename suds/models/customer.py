@@ -29,3 +29,17 @@ class FranchiseeProfile(models.Model):
     # company_name = fields.Char(related="parent_id.name")
     tax_type = fields.Selection(
         TAX_TYPE, string="Tax Type", default="non_vat",required=True)
+
+    sales_total = fields.Float(string="Sales",
+        compute='_compute_total_sales')
+    
+    @api.depends('sale_order_count')
+    def _compute_total_sales(self):
+        for i in self:
+            if i.sale_order_count:
+                sale_order_ids = i.sale_order_ids
+                for record in sale_order_ids:
+                    i.sales_total += record.amount_total
+        
+    
+    

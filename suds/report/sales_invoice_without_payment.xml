@@ -2,19 +2,22 @@
 <odoo>
     <data>
 
-     <template id="sales_invoice_inherit_view" inherit_id="account.report_invoice_document">
-        
-        <div class="row" position="replace"/>
+        <template id="sales_invoice_inherit_view" inherit_id="account.report_invoice_document">
 
-        <h2 position="before">
-            <div class="row">
-                <div name="invoice_address" class="col-xs-6" style="text-align: left;">
-                    <p> BILL TO </p>
-                    <address t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
-                    <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="o.partner_id.vat"/></div>
+            <div class="row" position="replace"/>
+
+            <h2 position="before">
+                <div class="row">
+                    <div name="invoice_address" class="col-xs-6" style="text-align: left;">
+                        <p> BILL TO </p>
+                        <address t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                        <div t-if="o.partner_id.vat" class="mt16">
+                            <t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>
+:                            <span t-field="o.partner_id.vat"/>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </h2>
+            </h2>
 
         
         <xpath expr="//div[hasclass('row','mt32','mb32')]" position="replace">
@@ -66,12 +69,18 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr t-foreach="o.invoice_line_ids" t-as="l">
-                        <td><span t-field="l.product_id"/></td>
-                        <td><span t-field="l.name"/></td>
-                        <td class="hidden"><span t-field="l.origin"/></td>
-                        <td class="text-right">
-                            <span t-field="l.quantity"/>
-                        </td>
+                            <td>
+                                <span t-field="l.product_id"/>
+                            </td>
+                            <td>
+                                <span t-field="l.name"/>
+                            </td>
+                            <td class="hidden">
+                                <span t-field="l.origin"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="l.quantity"/>
+                            </td>
                         <td class="text-right"> <span t-field="l.uom_id" groups="product.group_uom"/> </td>
                         <td class="text-right">
                             <span t-field="l.price_unit"/>
@@ -102,9 +111,9 @@
             </table>
         </t>
 
-     </template>
+        </template>
 
-     
+
 
     </data>
 </odoo>
