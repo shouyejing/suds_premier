@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <!-- SALES HISTORY -->
+        <report
+            id="sales_history_report_xlsx"
+            model="account.invoice"
+            string="Print Sales Report"
+            report_type="xlsx"
+            name="sales_history_report"
+            file="sales_history_report"
+            attachment_use="False"
+        />
+
+        <!-- PURCHASE HISTORY -->
+        <report
+            id="purchase_history_report_xlsx"
+            model="account.invoice"
+            string="Print Purchase Report"
+            report_type="xlsx"
+            name="purchase_history_report"
+            file="purchase_history_report"
+            attachment_use="False"
+        />
+    </data>
+</odoo>

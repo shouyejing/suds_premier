@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <odoo>
     <data>
-
+    <!-- Inherits Report Invoice Document (addons/account/views/report_invoice.xml) -->
      <template id="sales_invoice_inherit_view" inherit_id="account.report_invoice_document">
         
         <div class="row" position="replace"/>
@@ -16,6 +16,7 @@
             </div>
         </h2>
 
+        <!-- Alters Due Date to remove invisible attributes -->
         <xpath expr="//div[hasclass('row','mt32','mb32')]" position="replace">
                 <div class="row mt32 mb32">
                     <div class="col-xs-2" t-if="o.name">
