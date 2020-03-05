@@ -17,6 +17,7 @@
         'wizard/royalty_fee_lines.xml',
         'wizard/sale_to_project.xml',
         'views/analytic_account.xml',
+        'views/account_invoice.xml',
         'views/sales.xml',
         'views/sales_invoice.xml',
         'views/purchase.xml',

@@ -9,3 +9,4 @@ from . import res_user
 from . import petty_cash
 from . import account_payment
 from . import stock_move_line
+from . import account_invoice

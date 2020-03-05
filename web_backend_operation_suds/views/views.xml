@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="acquirer_form_inherit_suds">
+      <field name="name">acquirer.form.inherit.suds</field>
+      <field name="model">payment.acquirer</field>
+      <field name="inherit_id" ref="payment.acquirer_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='journal_id']" position="after">
+          <field name="website_order_configuration"/>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- payment acquirer information -->
+		<template id="website_sale.payment_confirmation_status">
+			
+			<t t-if="order.payment_acquirer_id.website_order_msg == 'confirm'">
+			  <div class="alert alert-info" role="alert">
+				<span><i>Confirmed,</i> Your order has been successfully processed.</span>
+			  </div>
+			</t>
+
+			<t t-if="order.payment_acquirer_id.website_order_msg == 'invoice'">
+			  <div class="alert alert-info" role="alert">
+				<span><i>Invoiced,</i> Your order has been successfully invoiced.</span>
+			  </div>
+			</t>
+			
+			<t t-if="order.payment_acquirer_id.website_order_msg == 'validate'">
+			  <div class="alert alert-info" role="alert">
+				<span><i>Validated,</i> Your order has been successfully processed. Also your invoice is validated.</span>
+			  </div>
+			</t>
+			
+			<t t-if="order.payment_acquirer_id.website_order_msg == 'payment'">
+			  <div class="alert alert-info" role="alert">
+				<span><i>Payment Done,</i> Your online payment has been successfully done.</span>
+			  </div>
+			</t>
+			
+		</template>	
+    
+  </data>
+</odoo>

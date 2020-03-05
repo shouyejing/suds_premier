@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<!-- res.config.settings -->
+		<record model="ir.ui.view" id="view_website_sale_res_config_settings_inherited_suds">
+			<field name="name">res.config.settings.inherited.suds</field>
+			<field name="model">res.config.settings</field>
+			<field name="inherit_id" ref="website.res_config_settings_view_form"/>
+			<field name="arch" type="xml">
+				<!-- <xpath expr="//div[hasclass('content-group')]/div[hasclass('row','mt16')]" position="after">
+					<div class="row mt16">
+						<label class="col-md-3 o_light_label" string="Acquirer IDs"/>
+						<field name="payment_acquirer_ids" widget="many2many_tags" />
+					</div>
+				</xpath> -->
+
+				<xpath expr="//field[@name='website_order_configuration']" position="replace">
+				</xpath>
+
+			</field>
+		</record>
+	</data>
+</odoo>
