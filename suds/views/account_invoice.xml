@@ -20,5 +20,17 @@
                 </xpath>
             </field>
         </record>
+
+
+        <record model="ir.ui.view" id="account_invoice__inherit_form">
+            <field name="name">suds.account.invoice.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
