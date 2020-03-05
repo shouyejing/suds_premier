@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-# Part of BrowseInfo. See LICENSE file for full copyright and licensing details.
-
 from odoo import SUPERUSER_ID, http, tools, _
 from odoo.http import request
 from datetime import datetime
 import logging
 from odoo.addons.website_sale.controllers.main import WebsiteSale
+# from website_backend_auto_operation.controllers.main import OdooWebsiteSale
 _logger = logging.getLogger("_name_")
 
 
-class OdooWebsiteSale(WebsiteSale):
+class OdooWebsiteSaleSuds(WebsiteSale):
 
 # When /shop/payment/validate done from backend create sales order, Validate, Create Invoice, Register Payment instead of Quotation...
 
@@ -60,18 +59,18 @@ class OdooWebsiteSale(WebsiteSale):
                     if tx and tx.state == 'draft':
                         return request.redirect('/shop')
 
-                    return request.redirect('/shop/confirmation')
+                    return request.redirect('/shop/confirmation')        
 
-                
-            if website_order_option == 'invoice':
+            if order.payment_acquirer_id.website_order_configuration == 'invoice':
                 self.order_option_invoice()
                 order.payment_acquirer_id.website_order_msg = 'invoice'
-            elif website_order_option == 'validate':
+            elif order.payment_acquirer_id.website_order_configuration == 'validate':
                 self.order_option_validate()
                 order.payment_acquirer_id.website_order_msg = 'validate'      
-            elif website_order_option == 'payment':
+            elif order.payment_acquirer_id.website_order_configuration == 'payment':
                 self.order_option_payment()
-                order.payment_acquirer_id.website_order_msg = 'payment'        
+                order.payment_acquirer_id.website_order_msg = 'payment'      
+                             
                             
         elif tx and tx.state == 'cancel':
             # cancel the quotation
