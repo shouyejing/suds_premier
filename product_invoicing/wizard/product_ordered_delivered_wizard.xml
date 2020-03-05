@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_ordered_delivered" model="ir.ui.view">
+            <field name="name">Set Invoicing Policy</field>
+            <field name="model">invoicing.policy</field>
+            <field name="arch" type="xml">
+                <form string="Set to Ordered/Delivered Quantities">
+                    <group>
+                        <field name="invoicing_policy" widget="radio"/>
+                    </group>
+                    <footer>
+                        <button name="set_invoicing_policy" string="Submit" type="object" class="oe_highlight" />
+                        <button special="cancel" string="Cancel" class="oe_highlight" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_ordered_delivered_wizard" model="ir.actions.act_window">
+            <field name="name">Set Invoicing Policy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">invoicing.policy</field>
+            <field name="view_id" ref="view_ordered_delivered"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+        </record>
+    
+        <act_window
+            id="act_ordered_delivered"
+            name="Set Invoicing Policy"
+            res_model="invoicing.policy"
+            src_model="product.template"
+            view_type="form"
+            view_mode="form"
+            key2="client_action_multi"
+            target="new"/>
+    </data>
+</odoo>
