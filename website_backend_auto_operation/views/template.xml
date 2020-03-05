@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+		<!-- res.config.settings -->
+		<record model="ir.ui.view" id="view_website_sale_res_config_settings_inherited">
+    		<field name="name">res.config.settings.inherited</field>
+    		<field name="model">res.config.settings</field>    		
+			<field name="inherit_id" ref="website.res_config_settings_view_form"/>    		
+    		<field name="arch" type="xml">        					
+                <xpath expr="//div[@class='app_settings_block']" position="after">
+		            <div class="app_settings_block" data-string="Website" data-key="website">
+                            <h2>Website Order Configuration</h2>
+                            <div class="row mt16 o_settings_container" id="webmaster_settings">
+                                <div class="col-xs-12 col-md-6 o_setting_box" id="domain_setting">
+                                    <div class="o_setting_right_pane">
+                                        <div class="content-group">
+                                            <div class="row mt16">
+                                                <label class="col-md-3 o_light_label" string="Website Order Configuration"/>
+                                                <field name="website_order_configuration" widget="radio"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </xpath>
+			</field>                	
+    	</record>
+    	
+
+
+            <!-- Payment Acquirer Inherited Form 
+            <record id="view_payment_acquirer_inherit_bi_form" model="ir.ui.view">
+                <field name="name">payment.acquirer.frm.bi.inherited</field>
+                <field name="model">payment.acquirer</field>
+                <field name="inherit_id" ref="payment.acquirer_form"/>
+                <field name="arch" type="xml">
+                <xpath expr="//field[@name='auto_confirm']" position="after">
+                           <field name="journal_id" domain="[('type','in',('cash','bank'))]"/>
+                    </xpath>
+                </field>
+            </record>-->
+            
+            
+
+
+		<!-- payment acquirer information -->
+		<template id="website_sale.payment_confirmation_status">
+			
+			<t t-if="order.payment_acquirer_id.website_order_msg == 'confirm'">
+			  <div class="alert alert-info" role="alert">
+				<span><i>Confirmed,</i> Your online payment has been successfully processed. But your order is not validated yet.</span>
+			  </div>
+			</t>
+
+			<t t-if="order.payment_acquirer_id.website_order_msg == 'invoice'">
+			  <div class="alert alert-info" role="alert">
+				<span><i>Invoiced,</i> Your online payment has been successfully invoiced. But your order is not validated yet.</span>
+			  </div>
+			</t>
+			
+			<t t-if="order.payment_acquirer_id.website_order_msg == 'validate'">
+			  <div class="alert alert-info" role="alert">
+				<span><i>Validated,</i> Your online payment has been successfully processed. also your order is validated.</span>
+			  </div>
+			</t>
+			
+			<t t-if="order.payment_acquirer_id.website_order_msg == 'payment'">
+			  <div class="alert alert-info" role="alert">
+				<span><i>Payment Done,</i> Your online payment has been successfully done.</span>
+			  </div>
+			</t>
+			
+		</template>		
+				
+		
+    </data>
+</openerp>
