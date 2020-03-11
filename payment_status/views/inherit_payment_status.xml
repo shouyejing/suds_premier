@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Form view -->
+    <record id="sales_payment_status_form" model="ir.ui.view">
+      <field name="name">sale.order.form</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//page/group/group/field[@name='invoice_status']" position="after">
+            <field name="payment_status" invisible="1" />
+        </xpath>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_sales_quotation_tree_inherit">
+           <field name="name">sale.order.tree.inherit</field>
+           <field name="model">sale.order</field>
+           <field name="type">tree</field>
+           <field name="inherit_id" ref="sale.view_quotation_tree"/>
+           <field name="arch" type="xml">
+                   <xpath expr="/tree/field[@name='state']" position="after">
+                       <field name="payment_status" />
+                   </xpath>
+           </field>
+       </record>
+
+    <record model="ir.ui.view" id="view_sales_orders_tree_inherit">
+           <field name="name">sale.order.tree.inherit</field>
+           <field name="model">sale.order</field>
+           <field name="type">tree</field>
+           <field name="inherit_id" ref="sale.view_order_tree"/>
+           <field name="arch" type="xml">
+                   <xpath expr="/tree/field[@name='invoice_status']" position="after">
+                       <field name="payment_status" />
+                   </xpath>
+           </field>
+       </record>
+
+     <record id="purchase_payment_status_form" model="ir.ui.view">
+      <field name="name">purchase.order.form</field>
+      <field name="model">purchase.order</field>
+      <field name="inherit_id" ref="purchase.purchase_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//page/group/group/field[@name='date_approve']" position="after">
+            <field name="payment_status" invisible="1" />
+        </xpath>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_purchase_tree_inherit">
+           <field name="name">purchase.order.tree.inherit</field>
+           <field name="model">purchase.order</field>
+           <field name="type">tree</field>
+           <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+           <field name="arch" type="xml">
+                   <xpath expr="/tree/field[@name='invoice_status']" position="after">
+                       <field name="payment_status" />
+                   </xpath>
+           </field>
+       </record>
+
+
+</odoo>
