@@ -25,8 +25,11 @@ class inheritSales(models.Model):
     def sales(self):
         for i in self:
             invoice = self.env['account.invoice'].search([('origin', '=', i.name)])
-            _logger.info('\n\n\nValue %s\n\n\n'%(invoice))
-            i.payment_status = dict(invoice._fields['state'].selection).get(invoice.state)
+            if invoice:
+                invoice = invoice[0]
+                i.payment_status = dict(invoice._fields['state'].selection).get(invoice.state)
+
+
 
 
 class inheritPurchase(models.Model):
@@ -38,5 +41,6 @@ class inheritPurchase(models.Model):
     def purchase(self):
         for i in self:
             invoice = self.env['account.invoice'].search([('origin', '=', i.name)])
-            _logger.info('\n\n\nValue %s\n\n\n'%(invoice))
-            i.payment_status = dict(invoice._fields['state'].selection).get(invoice.state)
+            if invoice:
+                invoice = invoice[0]
+                i.payment_status = dict(invoice._fields['state'].selection).get(invoice.state)
