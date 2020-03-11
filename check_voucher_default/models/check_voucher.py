@@ -181,8 +181,7 @@ class CheckVoucher(models.Model):
             for j in i.account_ids:
                 debit_total += round(j.debit_amount,2)
                 credit_total += round(j.credit_amount,2)
-                # _logger.info(
-                #     "\n\n\nDebit Amount: \n%s\n Credit Amount: \n\n\n\n" % (str(debit_total)))
+
         if debit_total != credit_total:
             raise ValidationError(
                 _("Total Debit Amount must be the same as Total Credit Amount"))
@@ -264,7 +263,7 @@ class CheckVoucher(models.Model):
     @api.multi
     def _compute_total_debit(self):
         total_debit = sum([i.debit_amount for i in self.account_ids])
-        _logger.info(f'Total Debit:\n\n\n{str(total_debit)}\n\n\n')
+
         return total_debit
 
     @api.multi
@@ -340,7 +339,7 @@ class AccountPayment(models.Model):
 
     """Modified Confirm Button in Account Payment"""
     @api.multi
-    def post(self):        
+    def post(self):
         if self.payment_type == 'outbound' and self.journal_id.type == 'bank' and self.payment_method_id == 4:
             if self.check_voucher_id.id == False:
                 raise UserError(_('Check Voucher must be created for this record before confirming.'))
@@ -370,5 +369,3 @@ class AccountPayment(models.Model):
             return data
         else:
             return res
-
-
