@@ -38,7 +38,6 @@
           <field name="voucher_id_seq"/>
           <field name="state"/>
           <field name="date"/>
-
         </tree>
       </field>
     </record>
