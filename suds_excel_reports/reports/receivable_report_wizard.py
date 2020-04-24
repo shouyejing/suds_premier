@@ -77,4 +77,4 @@ class receivablexlsxreport(models.AbstractModel):
                     receivable.write(row, 5, inv.amount_total, content_float)
                     receivable.write(row, 6, inv.residual, content_float)
                     receivable.write(row, 7, 'Open', content)
-                row += 1
+                    row += 1

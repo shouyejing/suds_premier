@@ -90,5 +90,5 @@ class salesandinvoicexlsxreport(models.AbstractModel):
                     sales_invoice.write(row, 9, i.quantity, content)
                     sales_invoice.write(row, 10, inv.amount_total, content_float)
                     sales_invoice.write(row, 11, inv.state, content)
-                row += 1
-            row += 2
+                    row += 1
+                row += 2
